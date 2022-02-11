@@ -1,0 +1,39 @@
+/*
+Colors : 
+    - vert 1 : #7BA86A
+    - vert 2 : #A9F58E
+    - pink   : #F58682
+    - blue 1 : #48A8A0
+    - blue 2 : #76F5EA
+*/
+
+* 
+{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #A9F58E;
+}
+
+header
+{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+
+    background-color: #A9F58E;
+
+    margin: 2em 0.5em;
+
+    text-align: center;
+}
+
+header > p
+{
+    font-size: 1.5em;
+}
+
+h1
+{
+    font-size: 4em;
+}
+
+
