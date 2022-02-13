@@ -8,10 +8,14 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Font -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&family=Roboto&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
 
 </head>
 
@@ -19,9 +23,9 @@
   <header>
     <h1>Portfolio</h1>
     <p>
-      Vous vous trouvez sur le portfolio de Florent Hardy. <br/>
-      En espérant que vous profiterez de votre séjour. <br/>
-      La suite se trouve plus bas ! 
+      Vous vous trouvez sur le portfolio de Florent Hardy.<br/>
+      Cliquez sur les flèches pour naviguer.<br/>
+      En espérant que vous profiterez de votre séjour !
     </p>
   </header>
 
@@ -34,10 +38,35 @@
   </nav>
 
   <!-- Jeux -->
-  <section>jfdbbbbbbb</section>
+  <section>
+    <h2>Jeu</h2>
+    <span>
+      <p>&lt;</p>
+      <p>&gt;</p>
+    </span>
+    <canvas id="affichage_jeu" alt=""></canvas>
+    <aside>En savoir plus</aside>
+  </section>
 
   <!-- Animation -->
-  <section></section>
+  <section>
+    <h2>Animation</h2>
+    <span>
+      <p>&lt;</p>
+      <p>&gt;</p>
+    </span>
+    <canvas id="affichage_pendule" 
+          alt="Un pendule attaché à un différent pendule, 
+              étant donné qu'ils s'influent entre eux,
+              ils créent un mouvement chaotique">
+    </canvas>
+    
+    <span class="controles">
+      <button onclick="d_pendule_animer(d_pendule);">Démarrer / Arrêter</button>
+      <button onclick="d_pendule_reset(d_pendule);">Nouveau pendule</button>
+    </span>
+    
+  </section>
 
   <!-- Rédactions / textes -->
   <section></section>
@@ -51,5 +80,8 @@
   </footer>
 
   <script src="jscript.js"></script>
+  <script>
+    
+  </script>
 </body>
 </html>

@@ -43,6 +43,8 @@ nav
 
     background-color: rgba(110, 140, 165, 0.60);
 
+    z-index: 100;
+
     position: sticky;
     top: 0%;
 }
@@ -73,7 +75,38 @@ section
     transition-timing-function: ease-in;
 }
 
-section:hover
+section h2
+{
+    font-size: 200%;
+    padding: 2%;
+}
+
+section span
+{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+
+    position: sticky;
+
+    z-index: 2;
+    top: 50%;
+    left: 2%;
+}
+
+section span p
+{
+    font-family: 'Nanum Gothic', sans-serif;
+
+    width: 5vw;
+}
+
+/*
+Remplacer slide par bouton/fleche
+Notion : animation, transform, transition
+slider css : https://codepen.io/davidicus/pen/pvObpV
+*/
+section > slide
 {
     transform: translateX(-100vw);
 }
@@ -83,7 +116,22 @@ section:nth-of-type(1)
     background-color: #76F5EA;
 }
 
+section:nth-of-type(1) *
+{
+    background-color: #76F5EA;
+}
+
 section:nth-of-type(2)
+{
+    background-color: #F58682;
+}
+
+section:nth-of-type(2) *
+{
+    background-color: #F58682;
+}
+
+section:nth-of-type(2) canvas
 {
     background-color: #F58682;
 }
