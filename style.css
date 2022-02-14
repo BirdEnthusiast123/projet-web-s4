@@ -10,32 +10,83 @@ Colors :
 * 
 {
     font-family: 'Source Sans Pro', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    background-color: #A9F58E;
     margin: 0%;
     text-align: center;
 }
 
-header
-{
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-
-    background-color: #A9F58E;
-
-    margin: 2em 0.5em;
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+    display: none;
 }
 
-header > p
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+header
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: -1;
+
+    background-color: rgba(0, 0, 0, 0);
+}
+
+header p
 {
     font-size: 1.5em;
+    color:antiquewhite;
+    text-align: left;
+    padding: 0.7em;
 }
 
 h1
 {
+    color:antiquewhite;
     font-size: 4em;
+    padding: 5%;
 }
 
+.parralax {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    perspective: 10px;
+}
+
+.background {
+    transform: translateZ(-10px) scale(2);
+    height: 100%;
+    width: 100%;
+}
+
+.foreground {
+    transform: translateZ(-5px) scale(1.5);
+    max-height: 25%;
+    width: auto;
+    top: -10%;
+    left: 45%;
+    cursor: pointer;
+}
+  
+.background,
+.foreground {
+    position: absolute;
+    object-fit: cover;
+    z-index: -1;
+}
+
+
+/*
+Navigation bar
+*/
 nav
 {
     display: flex;
@@ -68,11 +119,66 @@ nav p:hover
     background-color: #76F5EA;
 }
 
-section
+
+/*
+Main elements
+*/
+.slide {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+.arrow {
+    visibility: hidden;
+    position: absolute;
+
+    cursor: pointer;
+
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 3em;
+
+    background-color: rgba(0, 0, 0, 0.2);
+
+    width: 10%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 0 1.5vw 0 0 ;
+
+    border-width: 0;
+
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+} 
+
+.arrow:last-of-type {
+    visibility: visible;
+    left: inherit;
+    right: 0;
+    padding-left: 1.5vw;
+}
+
+.arrow:hover
 {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+  
+.scrollable {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-x: hidden;
+    scrollbar-width: none; /* Firefox */
+}
+  
+.elem {
+    flex-shrink: 0;
+    width: 100vw;
     height: 100vh;
-    transition-duration: 1s;
-    transition-timing-function: ease-in;
+    background: teal;
 }
 
 section h2
@@ -81,18 +187,6 @@ section h2
     padding: 2%;
 }
 
-section span
-{
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-
-    position: sticky;
-
-    z-index: 2;
-    top: 50%;
-    left: 2%;
-}
 
 section span p
 {
@@ -101,47 +195,64 @@ section span p
     width: 5vw;
 }
 
+.controles
+{
+    display: flex;
+    justify-content: space-around;
+}
+
 /*
 Remplacer slide par bouton/fleche
 Notion : animation, transform, transition
 slider css : https://codepen.io/davidicus/pen/pvObpV
+https://www.jag-conseil.com/guides/8-meilleurs-carrousels-en-css3-htm5-js-pour-site-web-moderne/#:~:text=Les%20carrousels%20en%20CSS%20%2F%20HTML,%2C%20etc...).
 */
 section > slide
 {
     transform: translateX(-100vw);
 }
 
-section:nth-of-type(1)
+article:nth-of-type(1)
 {
     background-color: #76F5EA;
 }
 
-section:nth-of-type(1) *
+article:nth-of-type(1) *:not(.arrow)
 {
     background-color: #76F5EA;
 }
 
-section:nth-of-type(2)
+article:nth-of-type(2)
 {
     background-color: #F58682;
 }
 
-section:nth-of-type(2) *
+article:nth-of-type(2) *:not(.arrow)
+{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+article:nth-of-type(2) canvas
 {
     background-color: #F58682;
 }
 
-section:nth-of-type(2) canvas
-{
-    background-color: #F58682;
-}
-
-section:nth-of-type(3)
+article:nth-of-type(3)
 {
     background-color: #7BA86A;
 }
 
-section:nth-of-type(4)
+article:nth-of-type(3) *:not(.arrow)
+{
+    background-color: #7BA86A;
+}
+
+article:nth-of-type(4)
+{
+    background-color: #A9F58E;
+}
+
+article:nth-of-type(4) *:not(.arrow)
 {
     background-color: #A9F58E;
 }

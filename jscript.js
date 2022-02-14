@@ -1,6 +1,98 @@
 
 
+// Pet the duck !!!
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+async function pet_duck()
+{
+    var duck = document.getElementById("foreground"); 
+    var duck_width = duck.width;
+    var duck_height = duck.height;
+
+    duck.src = "img/pet_duck.gif";
+
+    duck.width = duck_width;
+    duck.height = duck_height;
+
+    await sleep(1000);
+
+    duck.src = "img/duck.png";
+}
+
+document.getElementById("foreground").addEventListener("click", pet_duck);
+
+
+
+
+// Sliding carousel
+class CarouselSlider {
+    constructor(element) {
+        this.element = element;
+        this.scrollable = element.querySelector(".scrollable");
+        this.arrows = element.querySelectorAll(".arrow");
+        this.galleryItems = element.querySelectorAll(".elem");
+        this.galleryItems[0].focus();
+
+        this.arrows[0].addEventListener("click", () => this.scroll(-1)); // scroll backwards
+        this.arrows[1].addEventListener("click", () => this.scroll(1)); // scroll forwards
+        this.scrollable.addEventListener("scroll", () => this.toggleArrows());
+    }
+
+    toggleArrows() {
+        if (this.scrollable.scrollWidth > this.scrollable.clientWidth) {
+            /* Display at least one arrow when there is an overflow */
+            if (this.currPos <= 0) {
+                /* When position is 0 */
+                this.arrows[0].style.visibility = "hidden";
+                this.arrows[1].style.visibility = "visible";
+            } else if (
+                this.currPos + this.scrollable.clientWidth >=
+                this.scrollable.scrollWidth
+            ) {
+                /* When at the max position */
+                this.arrows[0].style.visibility = "visible";
+                this.arrows[1].style.visibility = "hidden";
+            } else {
+                /* Anywhere inbetween */
+                this.arrows[0].style.visibility = "visible";
+                this.arrows[1].style.visibility = "visible";
+            }
+        }
+    }
+
+    get currPos() {
+        return this.scrollable.scrollLeft;
+    }
+
+    scroll(dir) {
+        const width = this.scrollable.clientWidth;
+        if ("scrollBehavior" in document.documentElement.style)
+        // chrome and firefox
+        this.scrollable.scrollBy({
+            left: width * dir,
+            top: 0,
+            behavior: "smooth"
+        });
+        else {
+            try {
+                // safari
+                this.scrollable.scrollBy(width * dir, 0);
+            } catch (error) {
+                // edge
+                this.scrollable.scrollLeft = this.currPos + dir * width;
+            }
+        }
+    }
+}
+
+new CarouselSlider(document.querySelector("#jeu"));
+new CarouselSlider(document.querySelector("#anim"));
+new CarouselSlider(document.querySelector("#texte"));
+new CarouselSlider(document.querySelector("#perso"));
 
 
 // Code double pendule
@@ -16,7 +108,7 @@ function Particule(x, y, m, color){
     this.v = 0;
 
     // angle
-    this.a = Math.random() + 2;
+    this.a = Math.random() + 3;
 
     //couleur
     this.color = color;
@@ -35,7 +127,7 @@ function DoublePendulum(canvas, context)
     this.r1 = this.canvasMinSize/6;
     this.r2 = this.r1;
 
-    this.g = this.canvasMinSize/1000;
+    this.g = this.canvasMinSize/2000;
 
     this.drawnPoints = new Array();
 
@@ -114,6 +206,10 @@ function d_pendule_animer(d_pendulum)
     else
     {
         d_pendulum.isAnimated = true;
+        for(let i = 0; i < 200; i++)
+        {
+            d_pendulum.drawnPoints.push([d_pendulum.p2.x, d_pendulum.p2.y]);
+        }
         d_pendulum.intervalID = setInterval(function(){
             d_pendulum.calculDeplacements();
     
@@ -141,7 +237,8 @@ function d_pendule_animer(d_pendulum)
             d_pendulum.drawParticle(d_pendulum.p2);
     
             d_pendulum.drawnPoints.push([d_pendulum.p2.x, d_pendulum.p2.y]);
-        }, 14);
+            d_pendule.drawnPoints.splice(0, 1);
+        }, 15);
     }
 }
 
@@ -156,8 +253,8 @@ function d_pendule_reset(d_pendule)
     d_pendule.drawnPoints.splice(0, d_pendule.drawnPoints.length);
     clearInterval(d_pendule.intervalID);
     d_pendule.isAnimated = false;
-    d_pendule.p1 = new Particule(0, 0, this.canvas.height/20, "#7BA86A");
-    d_pendule.p2 = new Particule(0, 0, this.canvas.height/20, "#48A8A0");
+    d_pendule.p1 = new Particule(0, 0, this.canvas.height/10, "#7BA86A");
+    d_pendule.p2 = new Particule(0, 0, this.canvas.height/10, "#48A8A0");
 
     d_pendule.init_double_pendulum();
 }
