@@ -69,6 +69,7 @@
     <article id="anim" class="slide">
       <button class="arrow">&lt;</button>
       <div class="scrollable">
+        <!-- Double pendule -->
         <section class="elem">
           <h2>Animation 1</h2>
           <canvas id="affichage_pendule" 
@@ -84,12 +85,23 @@
           <aside>En savoir plus</aside>
         </section>
 
+        <!-- Dijkstra algorithm -->
         <section class="elem">
           <h2>Animation 2</h2>
-          <canvas id="affichage_pendule" 
-                alt="Un pendule attaché à un différent pendule, 
-                    étant donné qu'ils s'influent entre eux,
-                    ils créent un mouvement chaotique">
+          <canvas id="anim2" alt="">
+          </canvas>
+      
+          <span class="controles">
+            <button onclick="d_pendule_animer(d_pendule);">Démarrer / Arrêter</button>
+            <button onclick="d_pendule_reset(d_pendule);">Nouveau pendule</button>
+          </span>
+          <aside>En savoir plus</aside>
+        </section>
+
+        <!-- A* algortihm -->
+        <section class="elem">
+          <h2>Animation 2</h2>
+          <canvas id="anim2" alt="">
           </canvas>
       
           <span class="controles">
@@ -153,8 +165,5 @@
   </div>
 
   <script src="jscript.js"></script>
-  <script>
-    
-  </script>
 </body>
 </html>
