@@ -32,7 +32,7 @@ class CarouselSlider
         this.scrollable = element.querySelector(".scrollable");
         this.arrows = element.querySelectorAll(".arrow");
 
-        // addEventListener change le 'contexte' d'appel de la fonction en argument
+        // addEventListener change le 'contexte' d'appel de la fonction
         // Il faut passer par une fonction fléchée afin d'utiliser 'this'
         this.scrollable.addEventListener("scroll", () => this.toggleArrows());
         this.arrows[0].addEventListener("click", () => this.scroll(-1));
@@ -208,11 +208,25 @@ class Minesweeper
                                this.SQUARESIZE
                                );
     
-        if(this.bombs_and_digits[x][y] !== "9" && this.bombs_and_digits[x][y] !== "0"){
-            this.context.fillText(this.bombs_and_digits[x][y], ((x + 0.3) * this.SQUARESIZE), ((y + 0.7) * this.SQUARESIZE));
-        } else if(this.bombs_and_digits[x][y] == "9"){
+        if
+        ( 
+            (this.bombs_and_digits[x][y] !== "9") && 
+            (this.bombs_and_digits[x][y] !== "0")
+        )
+        {
+            this.context.fillText(this.bombs_and_digits[x][y], 
+                                  ((x + 0.3) * this.SQUARESIZE), 
+                                  ((y + 0.7) * this.SQUARESIZE)
+                                  );
+        } 
+        else if(this.bombs_and_digits[x][y] == "9"){
             let tmp_img = document.getElementById("Explosion.png");
-            this.context.drawImage(tmp_img, x * this.SQUARESIZE, y * this.SQUARESIZE, this.SQUARESIZE, this.SQUARESIZE);
+            this.context.drawImage(tmp_img, 
+                                   x * this.SQUARESIZE, 
+                                   y * this.SQUARESIZE, 
+                                   this.SQUARESIZE, 
+                                   this.SQUARESIZE
+                                   );
         }
     }
 
@@ -227,20 +241,40 @@ class Minesweeper
         }
     
         for(let i = 0; i < this.flagged.length; i++){
-            if(this.bombs_and_digits[this.flagged[i][0]][this.flagged[i][1]] !== "9"){
+            if
+            (
+                (this.bombs_and_digits
+                    [this.flagged[i][0]]
+                    [this.flagged[i][1]]
+                 !== "9"
+                )
+            )
+            {
                 this.context.fillStyle = "#d1342fcc";
-                this.context.fillRect(this.flagged[i][0] * this.SQUARESIZE + 1, this.flagged[i][1] * this.SQUARESIZE + 1,
-                this.SQUARESIZE - this.SPACE_INBETWEEN, this.SQUARESIZE - this.SPACE_INBETWEEN);
+                this.context.fillRect(this.flagged[i][0] * this.SQUARESIZE + 1, 
+                                      this.flagged[i][1] * this.SQUARESIZE + 1,
+                                      this.SQUARESIZE - this.SPACE_INBETWEEN, 
+                                      this.SQUARESIZE - this.SPACE_INBETWEEN);
     
                 let tmp_img = document.getElementById("Flag.png");
-                this.context.drawImage(tmp_img, this.flagged[i][0] * this.SQUARESIZE, this.flagged[i][1] * this.SQUARESIZE, this.SQUARESIZE, this.SQUARESIZE);
+                this.context.drawImage(tmp_img, 
+                                       this.flagged[i][0] * this.SQUARESIZE, 
+                                       this.flagged[i][1] * this.SQUARESIZE, 
+                                       this.SQUARESIZE, 
+                                       this.SQUARESIZE
+                                       );
             } else {
                 this.context.fillStyle = "#00990099";
-                this.context.fillRect(this.flagged[i][0] * this.SQUARESIZE + 1, this.flagged[i][1] * this.SQUARESIZE + 1,
-                this.SQUARESIZE - this.SPACE_INBETWEEN, this.SQUARESIZE - this.SPACE_INBETWEEN);
+                this.context.fillRect(this.flagged[i][0] * this.SQUARESIZE + 1, 
+                                      this.flagged[i][1] * this.SQUARESIZE + 1,
+                                      this.SQUARESIZE - this.SPACE_INBETWEEN, 
+                                      this.SQUARESIZE - this.SPACE_INBETWEEN);
     
                 let tmp_img = document.getElementById("Flag.png");
-                this.context.drawImage(tmp_img, this.flagged[i][0] * this.SQUARESIZE, this.flagged[i][1] * this.SQUARESIZE, this.SQUARESIZE, this.SQUARESIZE);
+                this.context.drawImage(tmp_img, 
+                                       this.flagged[i][0] * this.SQUARESIZE, 
+                                       this.flagged[i][1] * this.SQUARESIZE, 
+                                       this.SQUARESIZE, this.SQUARESIZE);
             }
         }
     }
@@ -256,7 +290,13 @@ class Minesweeper
                 } else if (this.bombs_and_digits[i+j][ii+jj] == 0){
                     this.uncover(i + j, ii + jj);
     
-                    if(!(this.point_in_array(i + j, ii + jj, this.uncovered_zeros))){
+                    if
+                    (
+                        !(this.point_in_array(i + j, 
+                                              ii + jj, 
+                                              this.uncovered_zeros))
+                    )
+                    {
                         this.uncovered_zeros.push([i + j, ii + jj]);
                         this.uncover_zeros(i + j, ii + jj);
                     }
@@ -268,14 +308,27 @@ class Minesweeper
     uncover_near_zeros(){
         for(let i = 0; i < this.uncovered_zeros.length; i++){
             for(let j = -1; j < 2; j++){
-                if( ((this.uncovered_zeros[i][0] + j) < 0) || ((this.uncovered_zeros[i][0] + j) > this.NB_LIGNES - 1) ){
+                if
+                ( 
+                    ((this.uncovered_zeros[i][0] + j) < 0) || 
+                    ((this.uncovered_zeros[i][0] + j) > this.NB_LIGNES - 1) 
+                )
+                {
                     continue;
                 }
                 for(let jj = -1; jj < 2; jj++){
-                    if( ((this.uncovered_zeros[i][1] + jj) < 0) || ((this.uncovered_zeros[i][1] + jj) > this.NB_LIGNES - 1) ){
+                    if
+                    ( 
+                        ((this.uncovered_zeros[i][1] + jj) < 0) || 
+                        ((this.uncovered_zeros[i][1] + jj) > this.NB_LIGNES - 1)
+                    )
+                    {
                         continue;
-                    } else {
-                        this.uncover(this.uncovered_zeros[i][0] + j, this.uncovered_zeros[i][1] + jj);
+                    } 
+                    else 
+                    {
+                        this.uncover(this.uncovered_zeros[i][0] + j, 
+                                     this.uncovered_zeros[i][1] + jj);
                     }
                 }
             }
@@ -314,24 +367,40 @@ class Minesweeper
 
     r_click(mouseX_ratio, mouseY_ratio)
     {
-        if(this.point_in_array(mouseX_ratio, mouseY_ratio, this.flagged)){
-            this.context.fillRect(mouseX_ratio * this.SQUARESIZE, mouseY_ratio * this.SQUARESIZE,
-            this.SQUARESIZE - this.SPACE_INBETWEEN, this.SQUARESIZE - this.SPACE_INBETWEEN);
+        if(this.point_in_array(mouseX_ratio, mouseY_ratio, this.flagged))
+        {
+            this.context.fillRect(mouseX_ratio * this.SQUARESIZE, 
+                                  mouseY_ratio * this.SQUARESIZE,
+                                  this.SQUARESIZE - this.SPACE_INBETWEEN, 
+                                  this.SQUARESIZE - this.SPACE_INBETWEEN
+                                  );
 
             let splice_index = -1;
             for(let k = 0; k < this.flagged.length; k++){
-                if( (this.flagged[k][0] == mouseX_ratio) && (this.flagged[k][1] == mouseY_ratio) ){
+                if
+                ( 
+                    (this.flagged[k][0] == mouseX_ratio) && 
+                    (this.flagged[k][1] == mouseY_ratio) 
+                )
+                {
                     splice_index = k;
                 }
             }
             this.flagged.splice(splice_index,1);
-        } else if( this.point_in_array(mouseX_ratio, mouseY_ratio, this.uncovered) )
+        } 
+        else if(this.point_in_array(mouseX_ratio, mouseY_ratio, this.uncovered))
         {
             return;
-        } else {
+        } 
+        else 
+        {
             let tmp_img = document.getElementById("Flag.png");
 
-            this.context.drawImage(tmp_img, mouseX_ratio * this.SQUARESIZE, mouseY_ratio * this.SQUARESIZE, this.SQUARESIZE - 3, this.SQUARESIZE - 3);
+            this.context.drawImage(tmp_img, 
+                                   mouseX_ratio * this.SQUARESIZE, 
+                                   mouseY_ratio * this.SQUARESIZE, 
+                                   this.SQUARESIZE - 3, 
+                                   this.SQUARESIZE - 3);
 
             this.flagged.push([mouseX_ratio, mouseY_ratio]);
         }
@@ -360,8 +429,10 @@ class Minesweeper
 
         for(let i = 0; i < this.NB_LIGNES; i++){
             for(let ii = 0; ii < this.NB_LIGNES; ii++){
-                this.context.fillRect(i * this.SQUARESIZE + 1, ii * this.SQUARESIZE + 1,
-                this.SQUARESIZE - this.SPACE_INBETWEEN, this.SQUARESIZE - this.SPACE_INBETWEEN);
+                this.context.fillRect(i * this.SQUARESIZE + 1, 
+                                      ii * this.SQUARESIZE + 1,
+                                      this.SQUARESIZE - this.SPACE_INBETWEEN, 
+                                      this.SQUARESIZE - this.SPACE_INBETWEEN);
             }
         }
 
@@ -430,15 +501,21 @@ class DoublePendulum
         let num1 = -this.g * (2 * this.p1.m + this.p2.m) * Math.sin(this.p1.a);
         let num2 = -this.p2.m * this.g * Math.sin(this.p1.a - (2 * this.p2.a));
         let num3 = -2 * Math.sin(this.p1.a - this.p2.a) * this.p2.m;
-        let num4 = this.p2.v * this.p2.v * this.r2 + this.p1.v * this.p1.v * this.r1 * Math.cos(this.p1.a - this.p2.a);
-        let den = this.r1 * (2 * this.p1.m + this.p2.m - this.p2.m * Math.cos(2 * this.p1.a - 2 * this.p2.a));
+        let num4 = this.p2.v * this.p2.v * this.r2;
+        num4 += this.p1.v * this.p1.v * this.r1 * Math.cos(this.p1.a - this.p2.a);
+        let den = 2 * this.p1.m + this.p2.m;
+        den -= this.p2.m * Math.cos(2 * this.p1.a - 2 * this.p2.a);
+        den *= this.r1;
         let a1_a = (num1 + num2 + num3 * num4) * 0.99 / den;
     
         num1 = 2 * Math.sin(this.p1.a - this.p2.a);
         num2 = this.p1.v * this.p1.v * this.r1 * (this.p1.m + this.p2.m);
         num3 = this.g * (this.p1.m + this.p2.m) * Math.cos(this.p1.a);
-        num4 = this.p2.v * this.p2.v * this.r2 * this.p2.m * Math.cos(this.p1.a - this.p2.a);
-        den = this.r2 * (2 * this.p1.m + this.p2.m - this.p2.m * Math.cos(2 * this.p1.a - 2 * this.p2.a));
+        num4 = this.p2.v * this.p2.v * this.r2 * this.p2.m;
+        num4 *= Math.cos(this.p1.a - this.p2.a);
+        den = 2 * this.p1.m + this.p2.m;
+        den -= this.p2.m * Math.cos(2 * this.p1.a - 2 * this.p2.a)
+        den *= this.r2;
         let a2_a = (num1 * (num2 + num3 + num4)) * 0.99 / den;
     
         this.p1.x = this.r1 * Math.sin(this.p1.a) + this.canvas.width/2;
@@ -495,11 +572,19 @@ function d_pendule_animer(d_pendulum)
             d_pendulum.calculDeplacements();
     
             d_pendulum.ctx.fillStyle = "#F58682"
-            d_pendulum.ctx.fillRect(0,0,d_pendulum.canvas.width, d_pendulum.canvas.height);
+            d_pendulum.ctx.fillRect(0,
+                                    0,
+                                    d_pendulum.canvas.width, 
+                                    d_pendulum.canvas.height);
     
             for(let i = 0; i < d_pendulum.drawnPoints.length; i++){
                 d_pendulum.ctx.beginPath();
-                d_pendulum.ctx.arc(d_pendulum.drawnPoints[i][0], d_pendulum.drawnPoints[i][1], 1, 0, Math.PI * 2, true); 
+                d_pendulum.ctx.arc(d_pendulum.drawnPoints[i][0], 
+                                   d_pendulum.drawnPoints[i][1], 
+                                   1, 
+                                   0, 
+                                   Math.PI * 2, 
+                                   true); 
                 d_pendulum.ctx.stroke();
             }
             d_pendulum.ctx.beginPath();
@@ -510,7 +595,8 @@ function d_pendule_animer(d_pendulum)
     
             d_pendulum.ctx.beginPath();
             d_pendulum.ctx.moveTo(d_pendulum.p1.x, d_pendulum.p1.y);
-            d_pendulum.ctx.lineTo(d_pendulum.canvas.width/2, d_pendulum.canvas.height/3);
+            d_pendulum.ctx.lineTo(d_pendulum.canvas.width/2, 
+                                  d_pendulum.canvas.height/3);
             d_pendulum.ctx.closePath();
             d_pendulum.ctx.stroke();
     
