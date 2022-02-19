@@ -21,9 +21,9 @@
 
 <body>
   <div class="parralax">
+    <img src="img/duck.png" id="duck"/>
     <header>
       <img src="img/starrysky.PNG" class="background">
-      <img src="img/duck.png" id="foreground" class="foreground">
       <div class="header-text">
         <h1>Portfolio</h1>
         <p>
@@ -48,13 +48,28 @@
     <article id="jeu" class="slide">
       <button class="arrow">&lt;</button>
       <div class="scrollable">
+
         <section class="elem">
           <h2>Jeu 1</h2>
+
           <canvas id="affichage_mine" alt="Jeu du démineur">
             Votre navigateur ne supporte pas cet affichage graphique.
           </canvas>
           <img src="img/Explosion.png" id="Explosion.png" width="0px"/>
           <img src="img/Flag.png" id="Flag.png" width="0px"/>
+          
+          <span class="controles">
+            <label for="minesw_access">
+              <input type="checkbox" id="minesw_access" name="minesw_access"/>
+              Accessibilité
+            </label>
+          </span>
+          
+          <span class="controles" id="minesw_access_ctrls">
+            <button onclick="mine_sw.l_click(mine_sw.selected[0], mine_sw.selected[1]);">Découvrir case</button>
+            <button onclick="mine_sw.r_click(mine_sw.selected[0], mine_sw.selected[1]);">Poser drapeau</button>
+          </span>
+
           <aside>En savoir plus</aside>
         </section>
 

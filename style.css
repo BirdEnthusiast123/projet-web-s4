@@ -15,26 +15,37 @@ Colors :
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-::-webkit-scrollbar {
+::-webkit-scrollbar 
+{
     display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-body {
+body 
+{
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+#duck
+{
+    position: absolute;
+    max-height: 25%;
+    width: auto;
+    top: 10%;
+    left: 45%;
+    cursor: pointer;
+
+    z-index: 2;
 }
 
 header
 {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
 
     position: relative;
     height: 100%;
-    z-index: -1;
 
     transform-style: preserve-3d;
 
@@ -43,6 +54,9 @@ header
 
 header p
 {
+    position: relative;
+    top: 35%;
+
     font-size: 1.5em;
     color:antiquewhite;
     text-align: left;
@@ -51,6 +65,9 @@ header p
 
 h1
 {
+    position: relative;
+    top: 40%;
+
     color:antiquewhite;
     font-size: 4em;
     padding: 5%;
@@ -61,27 +78,19 @@ h1
     overflow-y: auto;
     overflow-x: hidden;
     perspective: 10px;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .background {
-    transform: translateZ(-10px) scale(2);
-    height: 100%;
-    width: 100%;
-}
-
-.foreground {
-    transform: translateZ(-5px) scale(1.5);
-    max-height: 25%;
-    width: auto;
-    top: -10%;
-    left: 45%;
-    cursor: pointer;
-}
-  
-.background,
-.foreground {
     position: absolute;
     object-fit: cover;
+
+    transform: translateZ(-10px) scale(2.1);
+    height: 100%;
+    width: 100%;
+
     z-index: -1;
 }
 
@@ -206,6 +215,7 @@ section span p
 {
     display: flex;
     justify-content: space-around;
+    padding-bottom: 2.5%;
 }
 
 .controles *
@@ -221,6 +231,11 @@ article:nth-of-type(1)
 article:nth-of-type(1) *:not(.arrow)
 {
     background-color: #76F5EA;
+}
+
+#minesw_access_ctrls
+{
+    display: none;
 }
 
 article:nth-of-type(2)
