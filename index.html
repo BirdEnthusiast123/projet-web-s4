@@ -48,7 +48,7 @@
     <article id="jeu" class="slide">
       <button class="arrow">&lt;</button>
       <div class="scrollable">
-
+        <!-- Minesweeper-->
         <section class="elem">
           <h2>Jeu 1</h2>
 
@@ -104,15 +104,15 @@
           <aside>En savoir plus</aside>
         </section>
 
-        <!-- Dijkstra algorithm -->
+        <!-- Quicksort algorithm -->
         <section class="elem">
           <h2>Animation 2</h2>
-          <canvas id="anim2" alt="">
+          <canvas id="affichage_sort" alt="Animation représentant 
+                      le fonctionnement de l'algorithme quicksort">
           </canvas>
       
           <span class="controles">
-            <button onclick="d_pendule_animer(d_pendule);">Démarrer / Arrêter</button>
-            <button onclick="d_pendule_reset(d_pendule);">Nouveau pendule</button>
+            <button onclick="sort_array.quick_sort(0, sort_array.size);">Démarrer</button>
           </span>
           <aside>En savoir plus</aside>
         </section>

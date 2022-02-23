@@ -780,11 +780,101 @@ function d_pendule_reset(d_pendule)
     d_pendule.init_double_pendulum();
 }
 
+
+// Sorting algorithm
+class QSortArray{
+    constructor(canvas, context, size)
+    {
+        this.size = size;
+        this.array = this.init_array();
+
+        this.canvas = canvas;
+        this.context = context;
+
+        this.value_width = Math.floor(this.canvas.width/this.size);
+
+        this.draw_all_value();
+    }
+
+    init_array()
+    {
+        var res = [];
+        for(let i = 0; i < this.size; i++)
+        {
+            res[i] = Math.random();
+        }
+        return res;
+    }
+
+    parti(p, r)
+    { 
+        let x = this.array[r];
+        let i = p - 1;
+        
+        for(let j = p; j < r; j++)
+        {
+            if(this.array[j] <= x)
+            {
+                i += 1;
+
+                let tmp1 = this.array[i];
+                this.array[i] = this.array[j];
+                this.array[j] = tmp1;
+
+                this.draw_all_value();
+            }
+        }
+        let tmp2 = this.array[i + 1];
+        this.array[i + 1] = this.array[r];
+        this.array[r] = tmp2;
+
+        return (i + 1);
+    }
+
+    quick_sort(p, r)
+    {
+        if(p < r)
+        {
+            let q = this.parti(this.array, p, r);
+            this.quick_sort(this.array, p, q-1);
+            this.quick_sort(this.array, q+1, r);
+        }
+    }
+
+
+
+    draw_value(index)
+    {
+        this.context.fillStyle = "#76F5EA99";
+        this.context.fillRect(index * this.value_width, 
+                                this.canvas.height - (this.array[index] * this.canvas.height),
+                                this.value_width, 
+                                this.canvas.height
+                                );
+    }
+
+    async draw_all_value()
+    {   
+        for(let i = 0; i < this.size; i++)
+        {
+            this.draw_value(i);
+            await sleep(100);
+            this.context.fillStyle = "#F58682";
+            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+}
+
+
+
 // Minesweeper var
 var mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access;
 
 // Double pendulum var
 var pendule_canvas, d_pendule;
+
+// Sorting var
+var sort_array = [];
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
@@ -840,6 +930,13 @@ document.addEventListener("DOMContentLoaded", function() {
     pendule_canvas.height = 0.8 * window.innerHeight;
     d_pendule = new DoublePendulum(pendule_canvas, pendule_ctx);
     d_pendule.init_double_pendulum();
-});
 
+    // Init quicksort algortihm
+    sort_canvas = document.getElementById("affichage_sort");
+    sort_ctx = sort_canvas.getContext("2d");
+    sort_canvas.width = 0.8 * window.innerWidth;
+    sort_canvas.height = 0.8 * window.innerHeight;
+    sort_array = new QSortArray(sort_canvas, sort_ctx, 100);
+
+});
 
