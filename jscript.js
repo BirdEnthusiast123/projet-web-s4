@@ -1,17 +1,13 @@
 
 
 // Pet the duck !!!
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function pet_duck()
 {
     var duck = document.getElementById("duck"); 
     var duck_width = duck.width;
     var duck_height = duck.height;
-
-    console.log("here");
 
     duck.src = "img/pet_duck.gif";
     // gif créé à l'aide de l'outil https://benisland.neocities.org/petpet/
@@ -791,7 +787,7 @@ class QSortArray{
         this.canvas = canvas;
         this.context = context;
 
-        this.value_width = Math.floor(this.canvas.width/this.size);
+        this.value_width = this.canvas.width/this.size;
 
         this.draw_all_value();
     }
@@ -806,7 +802,7 @@ class QSortArray{
         return res;
     }
 
-    parti(p, r)
+    async parti(p, r)
     { 
         let x = this.array[r];
         let i = p - 1;
@@ -822,30 +818,34 @@ class QSortArray{
                 this.array[j] = tmp1;
 
                 this.draw_all_value();
+                this.drawPivot(r);
+
+                await sleep(15);
             }
         }
         let tmp2 = this.array[i + 1];
         this.array[i + 1] = this.array[r];
         this.array[r] = tmp2;
 
+        this.draw_all_value();
+        this.drawPivot(r);
+
         return (i + 1);
     }
 
-    quick_sort(p, r)
+    async quick_sort(p, r)
     {
         if(p < r)
         {
-            let q = this.parti(this.array, p, r);
-            this.quick_sort(this.array, p, q-1);
-            this.quick_sort(this.array, q+1, r);
+            let q = await this.parti(p, r);
+            await this.quick_sort(p, q-1);
+            await this.quick_sort(q+1, r);
         }
     }
 
-
-
-    draw_value(index)
+    drawPivot(index)
     {
-        this.context.fillStyle = "#76F5EA99";
+        this.context.fillStyle = "#01C901AA";
         this.context.fillRect(index * this.value_width, 
                                 this.canvas.height - (this.array[index] * this.canvas.height),
                                 this.value_width, 
@@ -853,14 +853,23 @@ class QSortArray{
                                 );
     }
 
-    async draw_all_value()
+    draw_value(index)
+    {
+        this.context.fillStyle = "#010101AA";
+        this.context.fillRect(index * this.value_width, 
+                                this.canvas.height - (this.array[index] * this.canvas.height),
+                                this.value_width, 
+                                this.canvas.height
+                                );
+    }
+
+    draw_all_value()
     {   
+        this.context.fillStyle = "#F58682";
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         for(let i = 0; i < this.size; i++)
         {
             this.draw_value(i);
-            await sleep(100);
-            this.context.fillStyle = "#F58682";
-            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         }
     }
 }
@@ -936,7 +945,7 @@ document.addEventListener("DOMContentLoaded", function() {
     sort_ctx = sort_canvas.getContext("2d");
     sort_canvas.width = 0.8 * window.innerWidth;
     sort_canvas.height = 0.8 * window.innerHeight;
-    sort_array = new QSortArray(sort_canvas, sort_ctx, 100);
+    sort_array = new QSortArray(sort_canvas, sort_ctx, 300);
 
 });
 
