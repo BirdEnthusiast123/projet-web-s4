@@ -149,6 +149,7 @@ class Minesweeper
         return count;
     }
 
+    // Renvoie le nombre de bombes entourant la case (x, y)
     count_bombs(x, y)
     {
         let count = 0;
@@ -173,6 +174,7 @@ class Minesweeper
         return count;
     }
 
+    // Crée une grille
     create_board()
     {
         for(let i = 0; i < this.NB_LIGNES; i++)
@@ -212,6 +214,7 @@ class Minesweeper
         this.TOTAL_NB_BOMBS = this.count_total_nb_bombs()
     }
 
+    // Découvre une case
     uncover(x, y)
     {
         if(this.point_in_array(x, y, this.uncovered))
@@ -309,6 +312,8 @@ class Minesweeper
         }
     }
 
+    // Découvre toutes les cases voisinnes
+    // qui ne sont pas à proximité d'une mine
     uncover_zeros(i, ii){
         for(let j = -1; j < 2; j++){
             if( ((i + j) < 0) || ((i + j) > this.NB_LIGNES - 1) )
@@ -339,6 +344,7 @@ class Minesweeper
         }
     }
 
+    // Découvre les premières cases voisinnant une mine
     uncover_near_zeros(){
         for(let i = 0; i < this.uncovered_zeros.length; i++){
             for(let j = -1; j < 2; j++){
@@ -354,7 +360,7 @@ class Minesweeper
                     if
                     ( 
                         ((this.uncovered_zeros[i][1] + jj) < 0) || 
-                        ((this.uncovered_zeros[i][1] + jj) > this.NB_LIGNES - 1)
+                        ((this.uncovered_zeros[i][1] + jj) > this.NB_LIGNES-1)
                     )
                     {
                         continue;
@@ -371,7 +377,13 @@ class Minesweeper
 
     l_click(mouseX_ratio, mouseY_ratio)
     {   
-        if(this.point_in_array(this.selected[0], this.selected[1], this.flagged))
+        if
+        (
+            this.point_in_array(this.selected[0], 
+                                this.selected[1], 
+                                this.flagged
+                                )
+        )
         {
 
             let tmp_img = document.getElementById("Flag.png");
@@ -435,6 +447,7 @@ class Minesweeper
                                 this.SQUARESIZE + 3
                                 );
         this.selected = [-1, -1];
+
         if(this.point_in_array(mouseX_ratio, mouseY_ratio, this.flagged))
         {
             this.context.fillRect(mouseX_ratio * this.SQUARESIZE, 
@@ -457,7 +470,10 @@ class Minesweeper
             }
             this.flagged.splice(splice_index,1);
         } 
-        else if(this.point_in_array(mouseX_ratio, mouseY_ratio, this.uncovered))
+        else if
+        (
+            this.point_in_array(mouseX_ratio, mouseY_ratio, this.uncovered)
+        )
         {
             return;
         } 
@@ -532,6 +548,7 @@ class Minesweeper
                                 );
     }
 
+    // Initialise les interractions possibles avec la grille
     init_board()
     {
         this.canvas.addEventListener("mousedown", (event) => {
@@ -573,7 +590,8 @@ class Minesweeper
                 this.context.fillRect(i * this.SQUARESIZE + 1, 
                                       ii * this.SQUARESIZE + 1,
                                       this.SQUARESIZE - this.SPACE_INBETWEEN, 
-                                      this.SQUARESIZE - this.SPACE_INBETWEEN);
+                                      this.SQUARESIZE - this.SPACE_INBETWEEN
+                                      );
             }
         }
 
@@ -643,7 +661,7 @@ class DoublePendulum
         let num2 = -this.p2.m * this.g * Math.sin(this.p1.a - (2 * this.p2.a));
         let num3 = -2 * Math.sin(this.p1.a - this.p2.a) * this.p2.m;
         let num4 = this.p2.v * this.p2.v * this.r2;
-        num4 += this.p1.v * this.p1.v * this.r1 * Math.cos(this.p1.a - this.p2.a);
+        num4 += this.p1.v * this.p1.v * this.r1*Math.cos(this.p1.a-this.p2.a);
         let den = 2 * this.p1.m + this.p2.m;
         den -= this.p2.m * Math.cos(2 * this.p1.a - 2 * this.p2.a);
         den *= this.r1;
@@ -763,7 +781,7 @@ function d_pendule_reset(d_pendule)
 }
 
 // Minesweeper var
-var mine_sw_canvas, mine_sw_min_size, mine_sw;
+var mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access;
 
 // Double pendulum var
 var pendule_canvas, d_pendule;
@@ -782,7 +800,7 @@ document.addEventListener("DOMContentLoaded", function() {
     mine_sw_canvas.width = 0.7 * mine_sw_min_size;
     mine_sw_canvas.height = mine_sw_canvas.width ;
     
-    let font_size = mine_sw_min_size / 20;
+    let font_size = Math.floor(mine_sw_min_size / 20);
 
     mine_sw_ctx = mine_sw_canvas.getContext("2d");
     mine_sw_ctx.font = "" + font_size + "px Arial";
@@ -790,14 +808,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     mine_sw = new Minesweeper(mine_sw_canvas, mine_sw_ctx);
     mine_sw.init_board();
-
-    // Init double pendule
-    pendule_canvas = document.getElementById("affichage_pendule");
-    pendule_ctx = pendule_canvas.getContext("2d");
-    pendule_canvas.width = 0.95 * window.innerWidth;
-    pendule_canvas.height = 0.8 * window.innerHeight;
-    d_pendule = new DoublePendulum(pendule_canvas, pendule_ctx);
-    d_pendule.init_double_pendulum();
 
     minesw_access = document.getElementById("minesw_access");
     if(minesw_access.checked)
@@ -822,6 +832,14 @@ document.addEventListener("DOMContentLoaded", function() {
             mine_sw.accessibility = true;
         }
     });
+
+    // Init double pendule
+    pendule_canvas = document.getElementById("affichage_pendule");
+    pendule_ctx = pendule_canvas.getContext("2d");
+    pendule_canvas.width = 0.95 * window.innerWidth;
+    pendule_canvas.height = 0.8 * window.innerHeight;
+    d_pendule = new DoublePendulum(pendule_canvas, pendule_ctx);
+    d_pendule.init_double_pendulum();
 });
 
 
