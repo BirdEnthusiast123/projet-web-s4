@@ -9,7 +9,7 @@ async function pet_duck()
     var duck_width = duck.width;
     var duck_height = duck.height;
 
-    duck.src = "img/pet_duck.gif";
+    duck.src = "assets/img/pet_duck.gif";
     // gif créé à l'aide de l'outil https://benisland.neocities.org/petpet/
     // développé par Ben Island
 
@@ -18,7 +18,7 @@ async function pet_duck()
 
     await sleep(1000);
 
-    duck.src = "img/duck.png";
+    duck.src = "assets/img/duck.png";
 }
 
 // Sliding carousel
@@ -877,13 +877,13 @@ class QSortArray{
 
 
 // Minesweeper var
-var mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access;
+let mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access;
 
 // Double pendulum var
-var pendule_canvas, d_pendule;
+let pendule_canvas, d_pendule;
 
 // Sorting var
-var sort_array = [];
+let sort_array;
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
@@ -957,52 +957,48 @@ document.addEventListener("DOMContentLoaded", function() {
 // Code present dans le html
 
 //N le nombre de particules créées au lancement de la page
-            //tab_p le tableau contenant les points
-            var N = 10, tab_p = new Array();
- 
-            for (var i = 0; i < N; i++) {
-                //Code donné par le sujet, initialisation de N points
-                var m = genereNombre(10,100), rad = 0.0, ang = ((2*Math.PI*i) / N);
- 
-                if (m < 50) {
-                    rad = genereNombre(50,100);
-                } else {
-                    rad = genereNombre(100,200);
-                }
- 
-                var x = $("#affichage").attr("width")/2 + rad*Math.sin(ang);
-                var y = $("#affichage").attr("height")/2 + rad*Math.cos(ang);
- 
-                //Definition de la classe Particule dans le fichier js
-                var p = new Particule(x, y, m); 
- 
-                //Vitesse initialle des points 
-                p.xv = -0.01*rad*Math.cos(ang);
-                p.yv = 0.01*rad*Math.sin(ang);
-                
-                //Affichage des points
-                p.draw();
- 
-                //La method "push" ajoute p à la fin de tab_p
-                tab_p.push(p);
-            }
- 
-            //Initialisation et affichage du point central
-            var p_centre = new Particule($("#affichage").attr("width")/2, $("#affichage").attr("height")/2, 3000);
-            p_centre.rad = 17;
-            p_centre.mobile = false;
-            p_centre.draw();
- 
-            //Ajout du point central à la liste
-            tab_p.push(p_centre);
+//tab_p le tableau contenant les points
+var N = 10, tab_p = new Array();
+for (var i = 0; i < N; i++) {
+    //Code donné par le sujet, initialisation de N points
+    var m = genereNombre(10,100), rad = 0.0, ang = ((2*Math.PI*i) / N);
+    if (m < 50) {
+        rad = genereNombre(50,100);
+    } else {
+        rad = genereNombre(100,200);
+    }
+    var x = $("#affichage").attr("width")/2 + rad*Math.sin(ang);
+    var y = $("#affichage").attr("height")/2 + rad*Math.cos(ang);
+    //Definition de la classe Particule dans le fichier js
+    var p = new Particule(x, y, m); 
+    //Vitesse initialle des points 
+    p.xv = -0.01*rad*Math.cos(ang);
+    p.yv = 0.01*rad*Math.sin(ang);
+    
+    //Affichage des points
+    p.draw();
+    //La method "push" ajoute p à la fin de tab_p
+    tab_p.push(p);
+}
+
+//Initialisation et affichage du point central
+var p_centre = new Particule($("#affichage").attr("width")/2, $("#affichage").attr("height")/2, 3000);
+p_centre.rad = 17;
+p_centre.mobile = false;
+p_centre.draw();
+
+//Ajout du point central à la liste
+tab_p.push(p_centre);
 
 
 // Code present dans le fichier js
 
 
 // Accès au canvas défini dans la structure HTML
-var canvas = $("#affichage")[0]; // get the actual DOM element
-var ctx = canvas.getContext("2d");
+let orbit_canvas = document.getElementById("affichage_orbit");
+let orbit_context = orbit_canvas.getContext("2d");
+orbit_canvas.width = 0.95 * window.innerWidth;
+orbit_canvas.height = 0.8 * window.innerHeight;
  
 // à noter: "#affichage" était auparavant "#nbody"
  
