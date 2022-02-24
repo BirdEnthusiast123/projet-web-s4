@@ -284,3 +284,46 @@ footer
     height: 20vh;
     background-color: #48A8A0;
 }
+
+/* Code provenant d'un precedent projet */
+
+/*TOUT CE QUI SUIT EST POUR LE SLIDER PRESENT DANS LE MENU*/
+ 
+/* Défini la barre du slider */
+.slider{
+    -webkit-appearance: none;
+    width: 40%;
+    height: 10px;
+    background: linear-gradient(90deg, rgb(193, 117, 252) 50%, rgb(214,214,214) 50%);
+    outline: none;
+    opacity: 0.820;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+}
+ 
+.slider:hover{
+  opacity: 1;
+}
+ 
+/* Code pour le cercle du slider sous GOOGLE CHROME */
+.slider::-webkit-slider-thumb{  
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+ 
+/* Code pour le cercle du slider sous MOZILLA */
+.slider::-moz-range-thumb{
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+ 
+/*FIN DE DEFINITION DU SLIDER*/
