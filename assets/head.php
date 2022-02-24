@@ -5,6 +5,7 @@
   <title>Portfolio FH</title>
 
   <link rel="stylesheet" href="assets/style.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,26 +1,4 @@
 
-
-// Pet the duck !!!
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-async function pet_duck()
-{
-    var duck = document.getElementById("duck"); 
-    var duck_width = duck.width;
-    var duck_height = duck.height;
-
-    duck.src = "assets/img/pet_duck.gif";
-    // gif créé à l'aide de l'outil https://benisland.neocities.org/petpet/
-    // développé par Ben Island
-
-    duck.width = duck_width;
-    duck.height = duck_height;
-
-    await sleep(1000);
-
-    duck.src = "assets/img/duck.png";
-}
-
 // Code double pendule
 class Pendule{
     constructor(x, y, m, color)
@@ -310,9 +288,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
     document.getElementById("duck").addEventListener("click", pet_duck);
 
-    // Init carouser sliders
-    document.querySelectorAll(".slide").forEach(e => new CarouselSlider(e));
-
     // Init double pendule
     pendule_canvas = document.getElementById("affichage_pendule");
     pendule_ctx = pendule_canvas.getContext("2d");
@@ -330,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-
+/*
 ///////////////////////////////////////////////////////////////////////////////
 
 // Code à modifier, provient d'un précédent projet
@@ -500,7 +475,6 @@ $('#zone').dblclick(function(event){
 });
  
 /* Algorithme pour la fonction calculDeplacements(particules, dt)
-* ------------------------------------------------- */
  
 //dt la différentielle du temps, G la constante gravitationnelle de Newton
 var dt = 0.2, G = 1;
@@ -523,7 +497,7 @@ function calculDeplacements(tab, dt){
         tab[i].xf = 0;
         tab[i].yf = 0;
  
-        /* Calcul de la force appliquée à i par toutes les autres particules j*/
+        // Calcul de la force appliquée à i par toutes les autres particules j
         for (j = 0; j < tab.length; j++){
             if (i == j){
                 continue;
@@ -542,7 +516,7 @@ function calculDeplacements(tab, dt){
             tab[i].yf += (f * dy) / r;
         }
  
-        /* Calcul de la nouvelle position de la particule i avec la méthode d'Euler */
+        // Calcul de la nouvelle position de la particule i avec la méthode d'Euler 
         //Attribution de l'accélération horizontale puis verticale
         let a_x = tab[i].xf / tab[i].m;
         let a_y = tab[i].yf / tab[i].m;
@@ -590,3 +564,5 @@ function stop(){
     clearInterval(intervalID);
     bool_animation = true;
 }
+
+*/

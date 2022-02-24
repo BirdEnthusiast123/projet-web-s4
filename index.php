@@ -20,7 +20,9 @@
   
 
     <!-- Navigation bar -->
+
     <?php include "assets/nav.php"; ?>
+
 
     <!-- Jeux -->
     <article id="jeu" class="slide">
@@ -96,34 +98,40 @@
         </section>
 
         <!-- A modifier, code d'un précédent projet-->
-        <section class="elem">
+        <section>
           <h2>Animation 3</h2>
-          <canvas id="affichage_orbit">Votre navigateur ne permet pas l'affichage d'un canvas</canvas> 
-          <div id="mainbox" class="manipulation_controles" onclick="Menu()"> 
-              <h3>&#8595; Afficher les contrôles</h3>
-          </div>
-          <div id="menu" class="ajout_particules">
+          <div id="zone" class="zone">
+            <canvas id="affichage" width="800" height="600">Votre navigateur ne permet pas l'affichage d'un canvas</canvas> 
+
+            <div id="mainbox" class="manipulation_controles" onclick="Menu()"> 
+                <h3>&#8595; Afficher les contrôles</h3>
+            </div>
+
+            <div id="menu" class="ajout_particules">
               <h2 class="">Particules</h2>
               <p>Pour ajouter des particules, double-cliquer dans le canvas. <br> La particule ajoutée aura les propriétés définies ci-dessous.</p>
               <ul>
-                  <li>
-                      <!-- Slider Masse-->
-                      <label for="masse">Masse : </label>
-                      <input type="range" min="1" max="500" value="250" id="myRange" class="slider">
-                      <span id="value"></span>
-                  </li>
-                  <li>
-                      <!-- Color Picker-->
-                      <label for="colorWell">Couleur : </label> 
-                      <input type="color" value="#9a1cd9" id="myColor">
-                  </li>
+                <li>
+                  <!-- Slider Masse-->
+                  <label for="masse">Masse : </label>
+                  <input type="range" min="1" max="500" value="250" id="myRange" class="slider">
+                  <span id="value"></span>
+                </li>
+
+                <li>
+                  <!-- Color Picker-->
+                  <label for="colorWell">Couleur : </label> 
+                  <input type="color" value="#9a1cd9" id="myColor">
+                </li>
               </ul>
-          </div>
-          <div class="controles">
-              <!-- Contient les boutons démarrer et arrêter -->
-              <div id="bouton_demarrer" onclick="start();">Start / Resume</div>
-              <div id="bouton_arreter" onclick="stop()">Stop / Pause</div>
-              
+            </div>
+
+            <div class="controles">
+                <!-- Contient les boutons démarrer et arrêter -->
+                <div id="bouton_demarrer" onclick="start();">Start / Resume</div>
+                <div id="bouton_arreter" onclick="stop()">Stop / Pause</div>
+            </div>
+
           </div>
         </section>
 
@@ -193,6 +201,9 @@
     </footer>
   </div>
 
-  <script src="jscript.js"></script>
+  <script src="assets/funcs.js"></script>
+  <script src="assets/script_jeux.js"></script>
+  <script src="assets/script_anim.js"></script>
+  <script src="assets/jscript.js"></script>
 </body>
 </html>
