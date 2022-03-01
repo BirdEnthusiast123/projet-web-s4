@@ -282,7 +282,7 @@ class QSortArray{
 let pendule_canvas, d_pendule;
 
 // Sorting var
-let sort_array;
+let sort_array, sort_canvas;
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
@@ -305,76 +305,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-/*
-///////////////////////////////////////////////////////////////////////////////
-
-// Code à modifier, provient d'un précédent projet
-
-// Code present dans le html
-
-//N le nombre de particules créées au lancement de la page
-//tab_p le tableau contenant les points
-var N = 10, tab_p = new Array();
-for (var i = 0; i < N; i++) {
-    //Code donné par le sujet, initialisation de N points
-    var m = genereNombre(10,100), rad = 0.0, ang = ((2*Math.PI*i) / N);
-    if (m < 50) {
-        rad = genereNombre(50,100);
-    } else {
-        rad = genereNombre(100,200);
-    }
-    var x = $("#affichage").attr("width")/2 + rad*Math.sin(ang);
-    var y = $("#affichage").attr("height")/2 + rad*Math.cos(ang);
-    //Definition de la classe Particule dans le fichier js
-    var p = new Particule(x, y, m); 
-    //Vitesse initialle des points 
-    p.xv = -0.01*rad*Math.cos(ang);
-    p.yv = 0.01*rad*Math.sin(ang);
-    
-    //Affichage des points
-    p.draw();
-    //La method "push" ajoute p à la fin de tab_p
-    tab_p.push(p);
+ 
+// Retourne un entier compris dans [min;max[
+const genereNombre = (min, max) => {
+    return Math.floor((Math.random()*(max-min))+min)
 }
-
-//Initialisation et affichage du point central
-var p_centre = new Particule($("#affichage").attr("width")/2, $("#affichage").attr("height")/2, 3000);
-p_centre.rad = 17;
-p_centre.mobile = false;
-p_centre.draw();
-
-//Ajout du point central à la liste
-tab_p.push(p_centre);
-
-
-// Code present dans le fichier js
-
+    
+// Génère une couleur hexa aléatoirement.   
+// Snippet récupéré sur https://stackoverflow.com/a/1484514
+const getRandomColor = () => {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++)
+    color += letters[Math.floor(Math.random() * 16)];
+    return color;
+}
 
 // Accès au canvas défini dans la structure HTML
 let orbit_canvas = document.getElementById("affichage_orbit");
 let orbit_context = orbit_canvas.getContext("2d");
-orbit_canvas.width = 0.95 * window.innerWidth;
+orbit_canvas.width = 0.8 * window.innerWidth;
 orbit_canvas.height = 0.8 * window.innerHeight;
- 
-// à noter: "#affichage" était auparavant "#nbody"
- 
-// Retourne un entier compris dans [min;max[
-function genereNombre(min, max){
- return Math.floor((Math.random()*(max-min))+min)
-}
- 
- 
-// Génère une couleur hexa aléatoirement.   
-// Snippet récupéré sur https://stackoverflow.com/a/1484514
-function getRandomColor() {
- let letters = '0123456789ABCDEF';
- let color = '#';
- for (let i = 0; i < 6; i++)
- color += letters[Math.floor(Math.random() * 16)];
- return color;
-}
- 
-// Code que j’ai réussi à faire (pour le menu)
+orbit_canvas.style.backgroundColor = "#000000"
+
 var compteur = 0;               // Cette variable sera utilisé pour savoir si le clique permet d'ouvrir (si compteur=0) ou de fermer (si compteur=1) le menu
  
 function Menu(){                // Cette fonction sera exécuté  à chaque fois que quelqu'un clique sur l'élément portant "onclick="Menu()" et elle permettra d'ouvrir et de fermer le menu
@@ -401,85 +354,50 @@ function closeFunction(){
     document.getElementById("mainbox").innerHTML="<h3> &#8595; Afficher les contrôles </h3>";
     // Le texte sur lequel l'utilisateur doit cliquer pour fermer le menu change grâce à cette ligne
 }
- 
- 
-// Code canvas
-function Particule(x, y, m){
- 
-    //x et y sont la position, m la masse
-    this.x = x;
-    this.y = y;
-    this.m = m;
- 
-    //x velocity et y velocity
-    this.xv = 0;
-    this.yv = 0;
- 
-    //x force et y force
-    this.xf = 0;
-    this.yf = 0;
- 
-    //booleen mobile = True, immobile = False
-    //servira lors de l'initialisation de la particule centrale immobile
-    this.mobile = true;
- 
-    //couleur
-    this.color = getRandomColor();
- 
-    //relation masse/rayon arbitraire ici rayon = ln(m * 2pi²)
-    this.rad = Math.log(m * 2 * Math.PI**2);
+
+class Particule{
+    constructor(x, y, m)
+    {
+        //x et y sont la position, m la masse
+        this.x = x;
+        this.y = y;
+        this.m = m;
+    
+        //x velocity et y velocity
+        this.xv = 0;
+        this.yv = 0;
+    
+        //x force et y force
+        this.xf = 0;
+        this.yf = 0;
+
+        //booleen mobile = True, immobile = False
+        //servira lors de l'initialisation de la particule centrale immobile
+        this.mobile = true;
+    
+        //couleur
+        this.color = getRandomColor();
+    
+        //relation masse/rayon arbitraire ici rayon = ln(m * 2pi²)
+        this.rad = Math.log(m * 2 * Math.PI**2);
+    }
  
     //affichage de la particule
-    this.draw = function(){
-        ctx.beginPath();
-        ctx.fillStyle = this.color
-        ctx.arc(this.x, this.y, this.rad, 0, Math.PI*2, true);
-        ctx.closePath();
-        ctx.fill();
+    draw()
+    {
+        orbit_context.beginPath();
+        orbit_context.fillStyle = this.color
+        orbit_context.arc(this.x, this.y, this.rad, 0, Math.PI*2, true);
+        orbit_context.closePath();
+        orbit_context.fill();
     };
 }  
+
  
-// Code pour le slider présent dans le menu
- 
-var slider = document.getElementById("myRange");
-var output = document.getElementById("value");
- 
-// Afficher la valeur du slider
-output.innerHTML = slider.value;
- 
-slider.oninput = function(){
-    output.innerHTML = this.value;
-}
- 
-$(slider).bind('mousemove click', function() {
-    // Si la souris se déplace sur le slider ou si l'utilisateur clique à un endroit sur le slider, la couleur est actualisée
-    // (une couleur jusqu'à la valeur du slider / une autre couleur pour le reste)
-    var sliderX = (slider.value*100)/500;
-    var sliderColor = 'linear-gradient(90deg, rgb(193, 117, 252)' + sliderX + '%, rgb(214,214,214)' + sliderX + '%)';
-    slider.style.background = sliderColor;
-});
- 
-// Fin du code du slider
- 
-//Ajout d'un point par doubleclick
-$('#zone').dblclick(function(event){
-    mouseX = event.pageX - $('#affichage').offset().left;
-    mouseY = event.pageY - $('#affichage').offset().top;
- 
-    var p_add = new Particule(mouseX, mouseY, slider.value);   // le dernier paramètre est la masse (output) du slider html
-    p_add.color = document.getElementById("myColor").value;
-    p_add.draw();
- 
-    //Ajout du point à la liste
-    tab_p.push(p_add);
-});
- 
-/* Algorithme pour la fonction calculDeplacements(particules, dt)
- 
-//dt la différentielle du temps, G la constante gravitationnelle de Newton
-var dt = 0.2, G = 1;
- 
-function calculDeplacements(tab, dt){
+function calculDeplacements(tab)
+{
+    //dt la différentielle du temps, G la constante gravitationnelle de Newton
+    let dt = 0.2, G = 10;
     for(i = 0; i < tab.length; i++){
  
         //Test si particule.mobile est True
@@ -488,8 +406,12 @@ function calculDeplacements(tab, dt){
         }
  
         //Non considération des particules 100pixels au delà du canevas
-        if (tab[i].x < -100 || tab[i].x > (document.getElementById("affichage").width + 100)
-        || tab[i].y < -100 || tab[i].y > (document.getElementById("affichage").height + 100)){
+        if
+        ( 
+            (tab[i].x < -100 || tab[i].x > orbit_canvas.width + 100) || 
+            (tab[i].y < -100 || tab[i].y > orbit_canvas.height + 100)
+        )
+        {
             continue;
         }
  
@@ -530,9 +452,7 @@ function calculDeplacements(tab, dt){
         tab[i].y += (tab[i].yv * dt);
     }
 }
- 
- 
- 
+
 //Animation
 //Code donné par le sujet
 var intervalID, bool_animation = true;
@@ -540,16 +460,17 @@ var intervalID, bool_animation = true;
 //tab_p se trouve dans le fichier html et est la liste des particules initialisées
 function animer(){
     intervalID = setInterval(function(){
-        calculDeplacements(tab_p, dt);
+        calculDeplacements(tab_p);
  
-        ctx.fillStyle = "#6495ed"
-        ctx.fillRect(0,0,canvas.width, canvas.height);
+        orbit_context.fillStyle = "#000000DD"
+        orbit_context.fillRect(0,0,orbit_canvas.width, orbit_canvas.height);
  
         for (var p = 0; p < tab_p.length; p++){
             tab_p[p].draw();
         }
     }, 10); // code exécuté toutes les 10 ms
 }
+
  
 //Correction d'un bug avec lequel il était possible de lancer plusieurs fois la simulation
 //rendant par la même occasion le bouton stop inutilisable
@@ -565,4 +486,40 @@ function stop(){
     bool_animation = true;
 }
 
-*/
+
+// Code present dans le html
+
+//N le nombre de particules créées au lancement de la page
+//tab_p le tableau contenant les points
+var N = 15, tab_p = new Array();
+for (var i = 0; i < N; i++) {
+    //Code donné par le sujet, initialisation de N points
+    var m = genereNombre(50,1000), rad = 0.0, ang = ((2*Math.PI*i) / N);
+    if (m < 50) {
+        rad = genereNombre(50,100);
+    } else {
+        rad = genereNombre(100,200);
+    }
+    var x = orbit_canvas.width/2 + rad*Math.sin(ang);
+    var y = orbit_canvas.height/2 + rad*Math.cos(ang);
+    //Definition de la classe Particule dans le fichier js
+    var p = new Particule(x, y, m); 
+    //Vitesse initialle des points 
+    p.xv = Math.random()/100*rad*Math.cos(ang);
+    p.yv = Math.random()/100*rad*Math.sin(ang);
+    
+    //Affichage des points
+    p.draw();
+    //La method "push" ajoute p à la fin de tab_p
+    tab_p.push(p);
+}
+
+//Initialisation et affichage du point central
+var p_centre = new Particule(orbit_canvas.width/2, orbit_canvas.height/2, 10000);
+p_centre.rad = 17;
+p_centre.mobile = false;
+p_centre.draw();
+
+//Ajout du point central à la liste
+tab_p.push(p_centre);
+
