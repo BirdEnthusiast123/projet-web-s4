@@ -3,7 +3,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function pet_duck()
 {
-    var duck = document.getElementById("duck"); 
+    var duck = (document.querySelectorAll("img"))[0]; 
     var duck_width = duck.width;
     var duck_height = duck.height;
 

@@ -197,7 +197,7 @@ class QSortArray{
 
     init_array()
     {
-        var res = [];
+        let res = [];
         for(let i = 0; i < this.size; i++)
         {
             res[i] = Math.random();
@@ -278,34 +278,10 @@ class QSortArray{
 }
 
 
-// Double pendulum var
-let pendule_canvas, d_pendule;
+// Code animation orbite de planetes
+// Rédigé par Kévin Hentz et Florent Hardy
+// étudiants à l'UFR de Mathématique et d'Informatique
 
-// Sorting var
-let sort_array, sort_canvas;
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Init duck petting
-    document.getElementById("duck").addEventListener("click", pet_duck);
-
-    // Init double pendule
-    pendule_canvas = document.getElementById("affichage_pendule");
-    pendule_ctx = pendule_canvas.getContext("2d");
-    pendule_canvas.width = 0.95 * window.innerWidth;
-    pendule_canvas.height = 0.8 * window.innerHeight;
-    d_pendule = new DoublePendulum(pendule_canvas, pendule_ctx);
-    d_pendule.init_double_pendulum();
-
-    // Init quicksort algortihm
-    sort_canvas = document.getElementById("affichage_sort");
-    sort_ctx = sort_canvas.getContext("2d");
-    sort_canvas.width = 0.8 * window.innerWidth;
-    sort_canvas.height = 0.8 * window.innerHeight;
-    sort_array = new QSortArray(sort_canvas, sort_ctx, 300);
-
-});
-
- 
 // Retourne un entier compris dans [min;max[
 const genereNombre = (min, max) => {
     return Math.floor((Math.random()*(max-min))+min)
@@ -321,16 +297,11 @@ const getRandomColor = () => {
     return color;
 }
 
-// Accès au canvas défini dans la structure HTML
-let orbit_canvas = document.getElementById("affichage_orbit");
-let orbit_context = orbit_canvas.getContext("2d");
-orbit_canvas.width = 0.8 * window.innerWidth;
-orbit_canvas.height = 0.8 * window.innerHeight;
-orbit_canvas.style.backgroundColor = "#000000"
 
-var compteur = 0;               // Cette variable sera utilisé pour savoir si le clique permet d'ouvrir (si compteur=0) ou de fermer (si compteur=1) le menu
- 
-function Menu(){                // Cette fonction sera exécuté  à chaque fois que quelqu'un clique sur l'élément portant "onclick="Menu()" et elle permettra d'ouvrir et de fermer le menu
+
+let compteur = 0;   // Cette variable sera utilisé pour savoir si le clique permet d'ouvrir (si compteur=0) ou de fermer (si compteur=1) le menu
+    
+function Menu(){    // Cette fonction sera exécuté  à chaque fois que quelqu'un clique sur l'élément portant "onclick="Menu()" et elle permettra d'ouvrir et de fermer le menu
     if (compteur === 0) {
         openFunction();
         compteur=1;             
@@ -340,20 +311,6 @@ function Menu(){                // Cette fonction sera exécuté  à chaque fois
         compteur=0;
     }
 } 
- 
-function openFunction(){
-    document.getElementById("menu").style.height = "200px";
-    // La ligne ci-dessus permet de modifier la hauteur (initialement =0px) du menu afin qu'il "s'ouvre"
-    document.getElementById("mainbox").innerHTML="<h3> &#8593; Fermer les contrôles </h3>";
-    // Le texte sur lequel l'utilisateur doit cliquer pour ouvrir le menu change grâce à cette ligne
-}
- 
-function closeFunction(){
-    document.getElementById("menu").style.height = "0px";
-    // La ligne ci-dessus permet de modifier la hauteur du menu afin qu'il se "referme" (la valeur était passé à 200px suite au premier clique cf. function openFunction)
-    document.getElementById("mainbox").innerHTML="<h3> &#8595; Afficher les contrôles </h3>";
-    // Le texte sur lequel l'utilisateur doit cliquer pour fermer le menu change grâce à cette ligne
-}
 
 class Particule{
     constructor(x, y, m)
@@ -381,7 +338,7 @@ class Particule{
         //relation masse/rayon arbitraire ici rayon = ln(m * 2pi²)
         this.rad = Math.log(m * 2 * Math.PI**2);
     }
- 
+    
     //affichage de la particule
     draw()
     {
@@ -393,18 +350,18 @@ class Particule{
     };
 }  
 
- 
+    
 function calculDeplacements(tab)
 {
     //dt la différentielle du temps, G la constante gravitationnelle de Newton
     let dt = 0.2, G = 10;
     for(i = 0; i < tab.length; i++){
- 
+    
         //Test si particule.mobile est True
         if (!(tab[i].mobile)){
             continue;
         }
- 
+    
         //Non considération des particules 100pixels au delà du canevas
         if
         ( 
@@ -414,39 +371,39 @@ function calculDeplacements(tab)
         {
             continue;
         }
- 
+    
         //Mise à zéro des forces avant de les (re)calculer
         tab[i].xf = 0;
         tab[i].yf = 0;
- 
+    
         // Calcul de la force appliquée à i par toutes les autres particules j
         for (j = 0; j < tab.length; j++){
             if (i == j){
                 continue;
             }
- 
+    
             //dx et dy respectivement distance horizontale et distance verticale des 2 points
             let dx = tab[j].x - tab[i].x;
             let dy = tab[j].y - tab[i].y;
- 
+    
             //r la distance p_i -> p_j, f la force selon Newton
             let r = Math.sqrt((dx*dx) + (dy*dy));
             let f = (G * tab[j].m) / (r*r);
- 
+    
             //Application de la force
             tab[i].xf += (f * dx) / r;
             tab[i].yf += (f * dy) / r;
         }
- 
+    
         // Calcul de la nouvelle position de la particule i avec la méthode d'Euler 
         //Attribution de l'accélération horizontale puis verticale
         let a_x = tab[i].xf / tab[i].m;
         let a_y = tab[i].yf / tab[i].m;
- 
+    
         //Calcul de la vitesse 
         tab[i].xv += (a_x * dt);
         tab[i].yv += (a_y * dt);
- 
+    
         //Calcul de la position/trajectoire 
         tab[i].x += (tab[i].xv * dt);
         tab[i].y += (tab[i].yv * dt);
@@ -455,23 +412,23 @@ function calculDeplacements(tab)
 
 //Animation
 //Code donné par le sujet
-var intervalID, bool_animation = true;
- 
+let intervalID, bool_animation = true;
+    
 //tab_p se trouve dans le fichier html et est la liste des particules initialisées
 function animer(){
     intervalID = setInterval(function(){
         calculDeplacements(tab_p);
- 
+    
         orbit_context.fillStyle = "#000000DD"
         orbit_context.fillRect(0,0,orbit_canvas.width, orbit_canvas.height);
- 
-        for (var p = 0; p < tab_p.length; p++){
+    
+        for (let p = 0; p < tab_p.length; p++){
             tab_p[p].draw();
         }
     }, 10); // code exécuté toutes les 10 ms
 }
 
- 
+    
 //Correction d'un bug avec lequel il était possible de lancer plusieurs fois la simulation
 //rendant par la même occasion le bouton stop inutilisable
 function start(){
@@ -480,46 +437,120 @@ function start(){
         animer();
     }
 }
- 
+    
 function stop(){
     clearInterval(intervalID);
     bool_animation = true;
 }
 
 
-// Code present dans le html
+// Double pendulum var
+let pendule_canvas, d_pendule;
 
-//N le nombre de particules créées au lancement de la page
-//tab_p le tableau contenant les points
-var N = 15, tab_p = new Array();
-for (var i = 0; i < N; i++) {
-    //Code donné par le sujet, initialisation de N points
-    var m = genereNombre(50,1000), rad = 0.0, ang = ((2*Math.PI*i) / N);
-    if (m < 50) {
-        rad = genereNombre(50,100);
-    } else {
-        rad = genereNombre(100,200);
+// Sorting var
+let sort_array, sort_canvas;
+
+// Orbit var
+let orbit_canvas, orbit_context, tab_p = [];
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Init duck petting
+    document.querySelectorAll("img")[0].addEventListener("click", pet_duck);
+
+    // Init double pendule
+    pendule_canvas = document.querySelectorAll(".anim canvas")[0];
+    pendule_ctx = pendule_canvas.getContext("2d");
+    pendule_canvas.width = 0.95 * window.innerWidth;
+    pendule_canvas.height = 0.8 * window.innerHeight;
+    d_pendule = new DoublePendulum(pendule_canvas, pendule_ctx);
+    d_pendule.init_double_pendulum();
+
+    document.querySelectorAll(".anim .controles")[0]
+            .querySelectorAll("button")[0]
+            .addEventListener("click", () => {
+                d_pendule_animer(d_pendule);
+            });
+
+    document.querySelectorAll(".anim .controles")[0]
+            .querySelectorAll("button")[1]
+            .addEventListener("click", () => {
+                d_pendule_reset(d_pendule);
+            });
+
+    // Init quicksort algortihm
+    sort_canvas = document.querySelectorAll(".anim canvas")[1];
+    sort_ctx = sort_canvas.getContext("2d");
+    sort_canvas.width = 0.8 * window.innerWidth;
+    sort_canvas.height = 0.8 * window.innerHeight;
+    sort_array = new QSortArray(sort_canvas, sort_ctx, 300);
+
+    document.querySelectorAll(".anim .controles")[1]
+            .querySelectorAll("button")[0]
+            .addEventListener("click", () => {
+                sort_array.quick_sort(0, sort_array.size - 1);
+            });
+
+    document.querySelectorAll(".anim .controles")[1]
+            .querySelectorAll("button")[1]
+            .addEventListener("click", () => {
+                sort_array = null;
+                sort_array = new QSortArray(sort_canvas, sort_ctx, 300);
+            });
+
+    // Init orbit simulation
+    orbit_canvas = document.querySelectorAll(".anim canvas")[2];
+    orbit_context = orbit_canvas.getContext("2d");
+    orbit_canvas.width = 0.8 * window.innerWidth;
+    orbit_canvas.height = 0.8 * window.innerHeight;
+    orbit_canvas.style.backgroundColor = "#000000"
+
+    //N le nombre de particules créées au lancement de la page
+    //tab_p le tableau contenant les points
+    let N = 15;
+    for (let i = 0; i < N; i++) {
+        //Code donné par le sujet, initialisation de N points
+        let m = genereNombre(50,1000), rad = 0.0, ang = ((2*Math.PI*i) / N);
+        if (m < 50) {
+            rad = genereNombre(50,100);
+        } else {
+            rad = genereNombre(100,200);
+        }
+        let x = orbit_canvas.width/2 + rad*Math.sin(ang);
+        let y = orbit_canvas.height/2 + rad*Math.cos(ang);
+        //Definition de la classe Particule dans le fichier js
+        let p = new Particule(x, y, m); 
+        //Vitesse initialle des points 
+        p.xv = Math.random()/100*rad*Math.cos(ang);
+        p.yv = Math.random()/100*rad*Math.sin(ang);
+        
+        //Affichage des points
+        p.draw();
+        //La method "push" ajoute p à la fin de tab_p
+        tab_p.push(p);
     }
-    var x = orbit_canvas.width/2 + rad*Math.sin(ang);
-    var y = orbit_canvas.height/2 + rad*Math.cos(ang);
-    //Definition de la classe Particule dans le fichier js
-    var p = new Particule(x, y, m); 
-    //Vitesse initialle des points 
-    p.xv = Math.random()/100*rad*Math.cos(ang);
-    p.yv = Math.random()/100*rad*Math.sin(ang);
-    
-    //Affichage des points
-    p.draw();
-    //La method "push" ajoute p à la fin de tab_p
-    tab_p.push(p);
-}
 
-//Initialisation et affichage du point central
-var p_centre = new Particule(orbit_canvas.width/2, orbit_canvas.height/2, 10000);
-p_centre.rad = 17;
-p_centre.mobile = false;
-p_centre.draw();
+    //Initialisation et affichage du point central
+    let p_centre = new Particule(orbit_canvas.width/2, orbit_canvas.height/2, 10000);
+    p_centre.rad = 17;
+    p_centre.mobile = false;
+    p_centre.draw();
 
-//Ajout du point central à la liste
-tab_p.push(p_centre);
+    //Ajout du point central à la liste
+    tab_p.push(p_centre);
+
+    document.querySelectorAll(".anim .controles")[2]
+    .querySelectorAll("button")[0]
+    .addEventListener("click", () => {
+        start();
+    });
+
+    document.querySelectorAll(".anim .controles")[2]
+    .querySelectorAll("button")[1]
+    .addEventListener("click", () => {
+        stop();
+    });
+});
+
+ 
+
 

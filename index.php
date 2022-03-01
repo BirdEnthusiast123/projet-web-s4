@@ -4,7 +4,7 @@
 
 <body>
   <div class="parralax">
-    <img src="assets/img/duck.png" id="duck" alt="pixel art d'un canard"/>
+    <img src="assets/img/duck.png" alt="pixel art d'un canard"/>
     <header>
       <img src="assets/img/starrysky.PNG" class="background">
       <div class="header-text">
@@ -25,29 +25,31 @@
 
 
     <!-- Jeux -->
-    <article id="jeu" class="slide">
+    <article class="slide jeux">
       <button class="arrow">&lt;</button>
       <div class="scrollable">
         <!-- Minesweeper-->
         <section class="elem">
           <h2>Jeu 1</h2>
 
-          <canvas id="affichage_mine" alt="Jeu du démineur">
+          <canvas class="affichage_mine" alt="Jeu du démineur">
             Votre navigateur ne supporte pas cet affichage graphique.
           </canvas>
-          <img src="assets/img/Explosion.png" id="Explosion.png" width="0px"/>
-          <img src="assets/img/Flag.png" id="Flag.png" width="0px"/>
+          <img src="assets/img/Explosion.png" width="0px"/>
+          <img src="assets/img/Flag.png" width="0px"/>
           
           <span class="controles">
+            <button>Nouvelle grille</button>
             <label for="minesw_access">
+              <!-- utilisation de id afin de pouvoir cliquer sur le texte egalement-->
               <input type="checkbox" id="minesw_access" name="minesw_access"/>
               Accessibilité
             </label>
           </span>
           
-          <span class="controles" id="minesw_access_ctrls">
-            <button onclick="mine_sw.l_click(mine_sw.selected[0], mine_sw.selected[1]);">Découvrir case</button>
-            <button onclick="mine_sw.r_click(mine_sw.selected[0], mine_sw.selected[1]);">Poser drapeau</button>
+          <span class="controles">
+            <button>Découvrir case</button>
+            <button>Poser drapeau</button>
           </span>
 
           <aside>En savoir plus</aside>
@@ -55,7 +57,7 @@
 
         <section class="elem">
           <h2>Jeu 2</h2>
-          <canvas id="affichage_jeu2" alt=""></canvas>
+          <canvas alt=""></canvas>
           <aside>En savoir plus</aside>
         </section>
       </div>
@@ -65,21 +67,21 @@
 
 
     <!-- Animation -->
-    <article id="anim" class="slide">
+    <article class="slide anim">
       <button class="arrow">&lt;</button>
       <div class="scrollable">
         <!-- Double pendule -->
         <section class="elem">
           <h2>Animation 1</h2>
-          <canvas id="affichage_pendule" 
+          <canvas 
                 alt="Un pendule attaché à un différent pendule, 
                     étant donné qu'ils s'influent entre eux,
                     ils créent un mouvement chaotique">
           </canvas>
       
           <span class="controles">
-            <button onclick="d_pendule_animer(d_pendule);">Démarrer / Arrêter</button>
-            <button onclick="d_pendule_reset(d_pendule);">Nouveau pendule</button>
+            <button>Démarrer / Arrêter</button>
+            <button>Nouveau pendule</button>
           </span>
           <aside>En savoir plus</aside>
         </section>
@@ -87,12 +89,13 @@
         <!-- Quicksort algorithm -->
         <section class="elem">
           <h2>Animation 2</h2>
-          <canvas id="affichage_sort" alt="Animation représentant 
+          <canvas alt="Animation représentant 
                       le fonctionnement de l'algorithme quicksort">
           </canvas>
       
           <span class="controles">
-            <button onclick="sort_array.quick_sort(0, sort_array.size - 1);">Démarrer</button>
+            <button>Démarrer</button>
+            <button>Réinitialiser</button>
           </span>
           <aside>En savoir plus</aside>
         </section>
@@ -100,26 +103,26 @@
         <!-- A modifier, code d'un précédent projet-->
         <section class="elem">
           <h2>Animation 3</h2>
-          <canvas id="affichage_orbit" >
+          <canvas>
             Votre navigateur ne permet pas l'affichage d'un canvas
           </canvas> 
 
           <span class="controles">
               <!-- Contient les boutons démarrer et arrêter -->
-              <button id="bouton_demarrer" onclick="start();">Start / Resume</button>
-              <button id="bouton_arreter" onclick="stop()">Stop / Pause</button>
+              <button>Démarrer</button>
+              <button>Arrêter</button>
           </span>
         </section>
 
         <!-- A* algortihm -->
         <section class="elem">
           <h2>Animation 2</h2>
-          <canvas id="anim2" alt="">
+          <canvas alt="">
           </canvas>
       
           <span class="controles">
-            <button onclick="d_pendule_animer(d_pendule);">Démarrer / Arrêter</button>
-            <button onclick="d_pendule_reset(d_pendule);">Nouveau pendule</button>
+            <button>Démarrer / Arrêter</button>
+            <button>Nouveau pendule</button>
           </span>
           <aside>En savoir plus</aside>
         </section>
@@ -128,18 +131,18 @@
     </article>
 
     <!-- Rédactions / textes -->
-    <article id="texte" class="slide">
+    <article class="slide">
       <button class="arrow">&lt;</button>
       <div class="scrollable">
         <section class="elem">
           <h2>Texte 1</h2>
-          <canvas id="affichage_texte1" alt=""></canvas>
+          <canvas alt=""></canvas>
           <aside>En savoir plus</aside>
         </section>
 
         <section class="elem">
           <h2>Texte 2</h2>
-          <canvas id="affichage_texte2" alt=""></canvas>
+          <canvas alt=""></canvas>
           <aside>En savoir plus</aside>
         </section>
       </div>
@@ -147,24 +150,24 @@
     </article>
 
     <!-- About personnel -->
-    <article id="perso" class="slide">
+    <article class="slide">
       <button class="arrow">&lt;</button>
       <div class="scrollable">
         <section class="elem">
           <h2>Perso 1</h2>
-          <canvas id="affichage_perso1" alt=""></canvas>
+          <canvas alt=""></canvas>
           <aside>En savoir plus</aside>
         </section>
 
         <section class="elem">
           <h2>Perso 2</h2>
-          <canvas id="affichage_perso2" alt=""></canvas>
+          <canvas alt=""></canvas>
           <aside>En savoir plus</aside>
         </section>
 
         <section class="elem">
           <h2>Perso 3</h2>
-          <canvas id="affichage_perso2" alt=""></canvas>
+          <canvas alt=""></canvas>
           <aside>En savoir plus</aside>
         </section>
       </div>

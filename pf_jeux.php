@@ -69,6 +69,7 @@
     </footer>
   </div>
 
-  <script src="jscript.js"></script>
+  <script src="assets/funcs.js"></script>
+  <script src="assets/jscript.js"></script>
 </body>
 </html>

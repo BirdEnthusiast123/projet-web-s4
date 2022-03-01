@@ -15,6 +15,8 @@ class CarouselSlider
         this.scrollable.addEventListener("scroll", () => this.toggleArrows());
         this.arrows[0].addEventListener("click", () => this.scroll(-1));
         this.arrows[1].addEventListener("click", () => this.scroll(1));
+
+        this.isBeingCalled = false;
     }   
 
     toggleArrows() 
@@ -45,8 +47,14 @@ class CarouselSlider
         return this.scrollable.scrollLeft;
     }
 
-    scroll(dir) 
+    async scroll(dir) 
     {
+        if(this.isBeingCalled)
+        {
+            return;
+        }
+
+        this.isBeingCalled = true;
         const width = this.scrollable.clientWidth;
         if ("scrollBehavior" in document.documentElement.style)
         {
@@ -54,9 +62,12 @@ class CarouselSlider
             this.scrollable.scrollBy(
             {
                 left: width * dir,
-                top: 0,
                 behavior: "smooth"
             });
+
+            // Empêche les appels multiples
+            // étant donné que get currPos est mis à jour au fur et à mesure
+            await sleep(600);
         }
         else 
         {
@@ -71,12 +82,14 @@ class CarouselSlider
                 this.scrollable.scrollLeft = this.currPos + dir * width;
             }
         }
+
+        this.isBeingCalled = false;
     }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
-    document.getElementById("duck").addEventListener("click", pet_duck);
+    document.querySelectorAll("img")[0].addEventListener("click", pet_duck);
 
     // Init carouser sliders
     document.querySelectorAll(".slide").forEach(e => new CarouselSlider(e));

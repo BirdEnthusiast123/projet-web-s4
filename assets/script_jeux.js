@@ -148,7 +148,7 @@ class Minesweeper
                                   );
         } 
         else if(this.bombs_and_digits[x][y] == "9"){
-            let tmp_img = document.getElementById("Explosion.png");
+            let tmp_img = document.querySelectorAll(".jeux canvas.affichage_mine ~ img")[0];
             this.context.drawImage(tmp_img, 
                                    x * this.SQUARESIZE, 
                                    y * this.SQUARESIZE, 
@@ -189,7 +189,7 @@ class Minesweeper
                                       this.SQUARESIZE - this.SPACE_INBETWEEN
                                       );
     
-                let tmp_img = document.getElementById("Flag.png");
+                let tmp_img = document.querySelectorAll(".jeux canvas.affichage_mine ~ img")[1];
                 this.context.drawImage(tmp_img, 
                                        this.flagged[i][0] * this.SQUARESIZE, 
                                        this.flagged[i][1] * this.SQUARESIZE, 
@@ -204,7 +204,7 @@ class Minesweeper
                                       this.SQUARESIZE - this.SPACE_INBETWEEN
                                       );
     
-                let tmp_img = document.getElementById("Flag.png");
+                let tmp_img = document.querySelectorAll(".jeux canvas.affichage_mine ~ img")[1];
                 this.context.drawImage(tmp_img, 
                                        this.flagged[i][0] * this.SQUARESIZE, 
                                        this.flagged[i][1] * this.SQUARESIZE, 
@@ -288,7 +288,7 @@ class Minesweeper
         )
         {
 
-            let tmp_img = document.getElementById("Flag.png");
+            let tmp_img = document.querySelectorAll(".jeux canvas.affichage_mine ~ img")[1];
             this.context.clearRect(this.selected[0] * this.SQUARESIZE - 3, 
                                     this.selected[1] * this.SQUARESIZE - 3, 
                                     this.SQUARESIZE + 3, 
@@ -307,6 +307,17 @@ class Minesweeper
                                     this.SQUARESIZE - 3, 
                                     this.SQUARESIZE - 3
                                     );
+            return;
+        }
+
+        if
+        (
+            this.point_in_array(mouseX_ratio, 
+                                mouseY_ratio, 
+                                this.flagged
+                                )
+        )
+        {
             return;
         }
 
@@ -381,7 +392,7 @@ class Minesweeper
         } 
         else 
         {
-            let tmp_img = document.getElementById("Flag.png");
+            let tmp_img = document.querySelectorAll(".jeux canvas.affichage_mine ~ img")[1];
 
             this.context.fillRect(mouseX_ratio * this.SQUARESIZE, 
                                     mouseY_ratio * this.SQUARESIZE,
@@ -429,7 +440,8 @@ class Minesweeper
                 )
             )
             {
-                let tmp_img = document.getElementById("Flag.png");
+                
+                let tmp_img = document.querySelectorAll(".jeux canvas.affichage_mine ~ img")[1];
                 this.context.drawImage(tmp_img, 
                                         this.selected[0] * this.SQUARESIZE, 
                                         this.selected[1] * this.SQUARESIZE, 
@@ -453,38 +465,7 @@ class Minesweeper
     // Initialise les interractions possibles avec la grille
     init_board()
     {
-        this.canvas.addEventListener("mousedown", (event) => {
-            let mouseX = event.offsetX - (event.offsetX % this.SQUARESIZE);
-            let mouseY = event.offsetY - (event.offsetY % this.SQUARESIZE);
-        
-            let mouseX_ratio = mouseX / this.SQUARESIZE;
-            let mouseY_ratio = mouseY / this.SQUARESIZE;
-
-            if(event.button == 0)
-            {
-                if(this.accessibility)
-                {
-                    this.select(mouseX_ratio, mouseY_ratio);
-                }
-                else
-                {
-                    this.l_click(mouseX_ratio, mouseY_ratio);
-                }
-            }
-
-            if(event.button == 2)
-            {
-                if(this.accessibility)
-                {
-                    return;
-                }
-                else
-                {
-                    this.r_click(mouseX_ratio, mouseY_ratio);
-                }
-            }
-        });
-
+        this.context.fillStyle = "#c18bdb";
         for(let i = 0; i < this.NB_LIGNES; i++)
         {
             for(let ii = 0; ii < this.NB_LIGNES; ii++)
@@ -503,16 +484,16 @@ class Minesweeper
 
 
 // Minesweeper var
-var mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access;
+let mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access;
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
-    document.getElementById("duck").addEventListener("click", pet_duck);
+    document.querySelectorAll("img")[0].addEventListener("click", pet_duck);
 
     // Init minesweeper
-    mine_sw_canvas = document.getElementById("affichage_mine");
+    mine_sw_canvas = document.querySelector(".jeux canvas");
     mine_sw_min_size = (window.innerWidth < window.innerHeight)? 
-                            window.innerWidth: window.innerHeight;
+                        window.innerWidth: window.innerHeight;
     mine_sw_canvas.width = 0.7 * mine_sw_min_size;
     mine_sw_canvas.height = mine_sw_canvas.width ;
     
@@ -525,18 +506,31 @@ document.addEventListener("DOMContentLoaded", function() {
     mine_sw = new Minesweeper(mine_sw_canvas, mine_sw_ctx);
     mine_sw.init_board();
 
-    minesw_access = document.getElementById("minesw_access");
+    minesw_access = document.querySelector(".jeux input");
     if(minesw_access.checked)
     {
-        document.getElementById("minesw_access_ctrls").style.display = "block";
+        document.querySelectorAll(".jeux canvas.affichage_mine ~ .controles")[1]
+                .style
+                .display = "block";
         mine_sw.accessibility = true;
     }
     else
     {
         mine_sw.accessibility = false;
     }
+
+    document.querySelectorAll(".jeux canvas.affichage_mine ~ .controles:last-of-type button")[0]
+            .addEventListener("click", () => {
+                mine_sw.l_click(mine_sw.selected[0], mine_sw.selected[1]);
+            });
+
+    document.querySelectorAll(".jeux canvas.affichage_mine ~ .controles:last-of-type button")[1]
+            .addEventListener("click", () => {
+                mine_sw.r_click(mine_sw.selected[0], mine_sw.selected[1]);
+            });
+
     minesw_access.addEventListener("click", function(){
-        let tmp = document.getElementById("minesw_access_ctrls");
+        let tmp = document.querySelectorAll(".jeux canvas.affichage_mine ~ .controles")[1];
         if(!(minesw_access.checked) )
         {
             tmp.style.display = "none";
@@ -548,6 +542,46 @@ document.addEventListener("DOMContentLoaded", function() {
             mine_sw.accessibility = true;
         }
     });
+
+    mine_sw_canvas.addEventListener("mousedown", (event) => {
+        let mouseX = event.offsetX - (event.offsetX % mine_sw.SQUARESIZE);
+        let mouseY = event.offsetY - (event.offsetY % mine_sw.SQUARESIZE);
+    
+        let mouseX_ratio = mouseX / mine_sw.SQUARESIZE;
+        let mouseY_ratio = mouseY / mine_sw.SQUARESIZE;
+
+        if(event.button == 0)
+        {
+            if(mine_sw.accessibility)
+            {
+                mine_sw.select(mouseX_ratio, mouseY_ratio);
+            }
+            else
+            {
+                mine_sw.l_click(mouseX_ratio, mouseY_ratio);
+            }
+        }
+
+        if(event.button == 2)
+        {
+            if(mine_sw.accessibility)
+            {
+                return;
+            }
+            else
+            {
+                mine_sw.r_click(mouseX_ratio, mouseY_ratio);
+            }
+        }
+    });
+
+    document.querySelectorAll(".jeux canvas.affichage_mine ~ .controles button")[0]
+            .addEventListener("click", () => {
+                tmp = mine_sw.accessibility;
+                mine_sw = new Minesweeper(mine_sw_canvas, mine_sw_ctx);
+                mine_sw.accessibility = tmp;
+                mine_sw.init_board();
+            });
 });
 
 
