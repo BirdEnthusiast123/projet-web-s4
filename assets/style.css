@@ -24,7 +24,6 @@
 body 
 {
     -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 body .parralax > img
@@ -217,7 +216,6 @@ Main elements
     justify-content: flex-start;
     align-items: flex-start;
     overflow-x: hidden;
-    scrollbar-width: none; /* Firefox */
 }
   
 .elem {

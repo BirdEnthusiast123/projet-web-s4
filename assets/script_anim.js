@@ -309,17 +309,6 @@ const getRandomColor = () => {
 
 
 let compteur = 0;   // Cette variable sera utilisé pour savoir si le clique permet d'ouvrir (si compteur=0) ou de fermer (si compteur=1) le menu
-    
-function Menu(){    // Cette fonction sera exécuté  à chaque fois que quelqu'un clique sur l'élément portant "onclick="Menu()" et elle permettra d'ouvrir et de fermer le menu
-    if (compteur === 0) {
-        openFunction();
-        compteur=1;             
-    }
-    else {
-        closeFunction();
-        compteur=0;
-    }
-} 
 
 class Particule{
     constructor(x, y, m)
@@ -364,7 +353,7 @@ function calculDeplacements(tab)
 {
     //dt la différentielle du temps, G la constante gravitationnelle de Newton
     let dt = 0.2, G = 10;
-    for(i = 0; i < tab.length; i++){
+    for(let i = 0; i < tab.length; i++){
     
         //Test si particule.mobile est True
         if (!(tab[i].mobile)){
@@ -386,7 +375,7 @@ function calculDeplacements(tab)
         tab[i].yf = 0;
     
         // Calcul de la force appliquée à i par toutes les autres particules j
-        for (j = 0; j < tab.length; j++){
+        for (let j = 0; j < tab.length; j++){
             if (i == j){
                 continue;
             }

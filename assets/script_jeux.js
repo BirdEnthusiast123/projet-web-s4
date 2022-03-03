@@ -580,7 +580,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelectorAll(".jeux canvas.affichage_mine ~ .controles button")[0]
             .addEventListener("click", () => {
-                tmp = mine_sw.accessibility;
+                let tmp = mine_sw.accessibility;
                 mine_sw = new Minesweeper(mine_sw_canvas, mine_sw_ctx);
                 mine_sw.accessibility = tmp;
                 mine_sw.init_board();

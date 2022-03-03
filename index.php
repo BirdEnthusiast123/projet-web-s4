@@ -6,7 +6,7 @@
   <div class="parralax">
     <img src="assets/img/duck.png" alt="pixel art d'un canard"/>
     <header>
-      <img src="assets/img/starrysky.PNG" class="background">
+      <img src="assets/img/starrysky.PNG" alt="pixel art d'un ciel étoilé" class="background">
       <div class="header-text">
         <h1>Portfolio</h1>
         <p>
