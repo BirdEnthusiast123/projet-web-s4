@@ -1,4 +1,8 @@
-
+import 
+{
+    pet_duck,
+    sleep
+} from "./funcs.js"
 
 // Sliding carousel
 // Modifications du code de Jacob Avery : https://codepen.io/jakeave/pen/MNqxxL
@@ -92,7 +96,12 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll("img")[0].addEventListener("click", pet_duck);
 
     // Init carouser sliders
-    document.querySelectorAll(".slide").forEach(e => new CarouselSlider(e));
+    document.querySelectorAll(".slide").forEach(e => 
+        {
+            let tmp = new CarouselSlider(e)
+            tmp.toggleArrows();
+        });
+    
 
     // Init menu
     document.querySelector("nav")

@@ -1,7 +1,16 @@
-// Pet the duck !!!
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const BODY = document.querySelector("body");
 
-async function pet_duck()
+export const PINK = getComputedStyle(BODY).getPropertyValue('--pink');
+export const BLUE1 = getComputedStyle(BODY).getPropertyValue('--blue1');
+export const BLUE2 = getComputedStyle(BODY).getPropertyValue('--blue2');
+export const GREEN1 = getComputedStyle(BODY).getPropertyValue('--green1');
+export const GREEN2 = getComputedStyle(BODY).getPropertyValue('--green2');
+
+
+// Pet the duck !!!
+export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+export const pet_duck = async function()
 {
     var duck = (document.querySelectorAll("img"))[0]; 
     var duck_width = duck.width;

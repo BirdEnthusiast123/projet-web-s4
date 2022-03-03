@@ -1,4 +1,7 @@
-
+import 
+{
+    pet_duck
+} from "./funcs.js"
 
 // Code minesweeper
 class Minesweeper
@@ -484,7 +487,7 @@ class Minesweeper
 
 
 // Minesweeper var
-let mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access;
+let mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access, mine_sw_ctx;
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting

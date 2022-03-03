@@ -1,3 +1,10 @@
+import 
+{
+    PINK,
+    GREEN1,
+    pet_duck,
+    sleep
+} from "./funcs.js"
 
 // Code double pendule
 class Pendule{
@@ -30,7 +37,8 @@ class DoublePendulum
         this.canvasMinSize = (this.canvas.height < this.canvas.width)? 
                             this.canvas.height: this.canvas.width;
 
-        this.p1 = new Pendule(0, 0, this.canvasMinSize/18, "#7BA86A");
+        this.p1 = new Pendule(0, 0, this.canvasMinSize/18, GREEN1);
+        
         this.p2 = new Pendule(0, 0, this.canvasMinSize/18, "#48A8A0");
         this.r1 = this.canvasMinSize/6;
         this.r2 = this.r1;
@@ -91,7 +99,8 @@ class DoublePendulum
 
     init_double_pendulum()
     {
-        this.ctx.fillStyle = "#F58682"
+        this.ctx.fillStyle = PINK;
+        console.log(this.ctx.fillStyle);
         this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
 
         this.calculDeplacements();
@@ -129,7 +138,7 @@ function d_pendule_animer(d_pendulum)
         d_pendulum.intervalID = setInterval(function(){
             d_pendulum.calculDeplacements();
     
-            d_pendulum.ctx.fillStyle = "#F58682"
+            d_pendulum.ctx.fillStyle = PINK;
             d_pendulum.ctx.fillRect(0,
                                     0,
                                     d_pendulum.canvas.width, 
@@ -173,7 +182,7 @@ function d_pendule_reset(d_pendule)
     d_pendule.drawnPoints.splice(0, d_pendule.drawnPoints.length);
     clearInterval(d_pendule.intervalID);
     d_pendule.isAnimated = false;
-    d_pendule.p1 = new Pendule(0, 0, d_pendule.canvas.height/10, "#7BA86A");
+    d_pendule.p1 = new Pendule(0, 0, d_pendule.canvas.height/10, GREEN1);
     d_pendule.p2 = new Pendule(0, 0, d_pendule.canvas.height/10, "#48A8A0");
 
     d_pendule.init_double_pendulum();
@@ -268,7 +277,7 @@ class QSortArray{
 
     draw_all_value()
     {   
-        this.context.fillStyle = "#F58682";
+        this.context.fillStyle = PINK;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         for(let i = 0; i < this.size; i++)
         {
@@ -445,10 +454,10 @@ function stop(){
 
 
 // Double pendulum var
-let pendule_canvas, d_pendule;
+let pendule_canvas, pendule_ctx, d_pendule;
 
 // Sorting var
-let sort_array, sort_canvas;
+let sort_array, sort_canvas, sort_ctx;
 
 // Orbit var
 let orbit_canvas, orbit_context, tab_p = [];

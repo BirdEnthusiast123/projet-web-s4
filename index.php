@@ -180,9 +180,9 @@
     </footer>
   </div>
 
-  <script src="assets/funcs.js"></script>
-  <script src="assets/script_jeux.js"></script>
-  <script src="assets/script_anim.js"></script>
-  <script src="assets/jscript.js"></script>
+  <script type="module" src="assets/funcs.js"></script>
+  <script type="module" src="assets/script_jeux.js"></script>
+  <script type="module" src="assets/script_anim.js"></script>
+  <script type="module" src="assets/jscript.js"></script>
 </body>
 </html>

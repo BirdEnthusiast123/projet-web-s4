@@ -1,11 +1,10 @@
-/*
-Colors : 
-    - vert 1 : #7BA86A
-    - vert 2 : #A9F58E
-    - pink   : #F58682
-    - blue 1 : #48A8A0
-    - blue 2 : #76F5EA
-*/
+:root{
+    --green1 : #7BA86A;
+    --green2 : #A9F58E;
+    --pink  : #F58682;
+    --blue1 : #48A8A0;
+    --blue2 : #76F5EA;
+}
 
 * 
 {
@@ -265,12 +264,12 @@ article
 
 article:nth-of-type(1)
 {
-    background-color: #76F5EA;
+    background-color: var(--blue2);
 }
 
 article:nth-of-type(1) *:not(.arrow)
 {
-    background-color: #76F5EA;
+    background-color: var(--blue2);
 }
 
 .jeux canvas.affichage_mine ~ .controles:nth-of-type(2)
@@ -280,7 +279,7 @@ article:nth-of-type(1) *:not(.arrow)
 
 article:nth-of-type(2)
 {
-    background-color: #F58682;
+    background-color: var(--pink);
 }
 
 article:nth-of-type(2) *:not(.arrow)
@@ -290,27 +289,27 @@ article:nth-of-type(2) *:not(.arrow)
 
 article:nth-of-type(2) canvas
 {
-    background-color: #F58682;
+    background-color: var(--pink);
 }
 
 article:nth-of-type(3)
 {
-    background-color: #7BA86A;
+    background-color: var(--green1);
 }
 
 article:nth-of-type(3) *:not(.arrow)
 {
-    background-color: #7BA86A;
+    background-color: var(--green1);
 }
 
 article:nth-of-type(4)
 {
-    background-color: #A9F58E;
+    background-color: var(--green2);
 }
 
 article:nth-of-type(4) *:not(.arrow)
 {
-    background-color: #A9F58E;
+    background-color: var(--green2);
 }
 
 
@@ -322,5 +321,5 @@ article:nth-of-type(4) *:not(.arrow)
 footer
 {
     height: 20vh;
-    background-color: #48A8A0;
+    background-color: var(--blue1);
 }
