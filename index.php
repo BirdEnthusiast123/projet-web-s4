@@ -57,7 +57,10 @@
 
         <section class="elem">
           <h2>Jeu 2</h2>
-          <canvas alt=""></canvas>
+          <canvas class="affichage_morp" 
+                  alt="jeu du morpion, le joueur qui aligne 3 de ses figures gagne">
+          Votre navigateur ne supporte pas cet affichage.     
+          </canvas>
           <aside>En savoir plus</aside>
         </section>
       </div>
@@ -77,6 +80,7 @@
                 alt="Un pendule attaché à un différent pendule, 
                     étant donné qu'ils s'influent entre eux,
                     ils créent un mouvement chaotique">
+                    Votre navigateur ne supporte pas cet affichage.
           </canvas>
       
           <span class="controles">
@@ -91,6 +95,7 @@
           <h2>Animation 2</h2>
           <canvas alt="Animation représentant 
                       le fonctionnement de l'algorithme quicksort">
+                      Votre navigateur ne supporte pas cet affichage.
           </canvas>
       
           <span class="controles">
@@ -100,11 +105,10 @@
           <aside>En savoir plus</aside>
         </section>
 
-        <!-- A modifier, code d'un précédent projet-->
         <section class="elem">
           <h2>Animation 3</h2>
           <canvas>
-            Votre navigateur ne permet pas l'affichage d'un canvas
+            Votre navigateur ne supporte pas cet affichage.
           </canvas> 
 
           <span class="controles">

@@ -172,7 +172,7 @@ Main elements
     position: relative;
     display: flex;
     justify-content: center;
-  }
+}
 
 .arrow {
     visibility: hidden;
@@ -221,9 +221,10 @@ Main elements
 .elem {
     flex-shrink: 0;
     width: 100vw;
-    height: 110vh;
+    height: auto;
     background: teal;
 }
+
 
 section h2
 {
@@ -318,6 +319,6 @@ article:nth-of-type(4) *:not(.arrow)
 
 footer
 {
-    height: 20vh;
+    height: 40vh;
     background-color: var(--blue1);
 }

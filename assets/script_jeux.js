@@ -485,9 +485,130 @@ class Minesweeper
     }
 }
 
+const OFS = 5;
+
+class GrilleMorpion
+{
+    constructor(canvas)
+    {
+        this.canvas = canvas;
+        this.ctx = this.canvas.getContext("2d");
+        this.grille = this.init_grille();
+        this.SQUARESIZE = this.canvas.width / 3;
+    }
+
+    init_grille()
+    {
+        return [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]; 
+    }
+
+    draw_cross(x, y)
+    {
+        this.ctx.strokeStyle = 'black';
+        this.ctx.lineWidth = 5;
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(x * this.SQUARESIZE + OFS, y * this.SQUARESIZE + OFS);
+        this.ctx.lineTo((x + 1) * this.SQUARESIZE - OFS, (y + 1) * this.SQUARESIZE - OFS);
+        this.ctx.stroke();
+
+        this.ctx.beginPath();
+        this.ctx.moveTo( (x + 1) * this.SQUARESIZE - OFS, y * this.SQUARESIZE + OFS);
+        this.ctx.lineTo(x * this.SQUARESIZE + OFS, (y + 1) * this.SQUARESIZE - OFS);
+        this.ctx.stroke();
+    }
+
+    draw_circle(x, y)
+    {
+        this.ctx.strokeStyle = 'black';
+        this.ctx.lineWidth = 5;
+
+        this.ctx.beginPath();
+        this.ctx.arc(x * this.SQUARESIZE + (this.SQUARESIZE / 2), 
+                     y * this.SQUARESIZE + (this.SQUARESIZE / 2), 
+                     this.SQUARESIZE/2 - OFS, 
+                     0, 
+                     2 * Math.PI);
+        this.ctx.stroke();
+    }
+
+    draw_empty_grid()
+    {
+        for(let i = 1; i < 3; i++)
+        {
+            this.ctx.beginPath();
+            this.ctx.moveTo(i * this.SQUARESIZE, 0);
+            this.ctx.lineTo(i * this.SQUARESIZE, this.canvas.height);
+            this.ctx.stroke();
+
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, i * this.SQUARESIZE);
+            this.ctx.lineTo(this.canvas.width, i * this.SQUARESIZE);
+            this.ctx.stroke();
+        }
+    }
+
+    draw_grille()
+    {
+        this.draw_empty_grid();
+
+        for(let i = 0; i < 3; i++)
+        {
+            for(let j = 0; j < 3; j++)
+            {
+                switch (this.grille[i][j]) {
+                    case 0:
+                        this.draw_cross(i, j);
+                        break;
+                    case 1:
+                        this.draw_circle(i, j);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    test_if_finished()
+    {
+        // row
+        for(let i = 0; i < 3; i++)
+        {
+            if( (this.grille[i][0] == this.grille[i][1]) && (this.grille[i][0] == this.grille[i][2]))
+            {
+                return this.grille[i][0];
+            }
+        }
+        // column
+        for(let i = 0; i < 3; i++)
+        {
+            if( (this.grille[0][i] == this.grille[1][i]) && (this.grille[0][i] == this.grille[2][i]))
+            {
+                return this.grille[0][i];
+            }
+        }
+        // diag
+        if( (this.grille[0][0] == this.grille[1][1]) && (this.grille[1][1] == this.grille[2][2]))
+        {
+            return this.grille[0][0];
+        }
+
+        if( (this.grille[2][0] == this.grille[1][1]) && (this.grille[2][0] == this.grille[0][2]))
+        {
+            return this.grille[2][0];
+        }
+
+        return -1;
+    }
+}
+
 
 // Minesweeper var
 let mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access, mine_sw_ctx;
+
+// Morpion var
+let morpion, morpion_canvas;
 
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
@@ -579,12 +700,59 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.querySelectorAll(".jeux canvas.affichage_mine ~ .controles button")[0]
-            .addEventListener("click", () => {
+            .addEventListener("click", () => 
+            {
                 let tmp = mine_sw.accessibility;
                 mine_sw = new Minesweeper(mine_sw_canvas, mine_sw_ctx);
                 mine_sw.accessibility = tmp;
                 mine_sw.init_board();
-            });
+            }
+    );
+
+/*
+Classe ia 
+
+function minimax(node, depth, maximizingPlayer) is
+    if depth = 0 or node is a terminal node then
+        return the heuristic value of node
+    if maximizingPlayer then
+        value := −∞
+        for each child of node do
+            value := max(value, minimax(child, depth − 1, FALSE))
+    else (* minimizing player *)
+        value := +∞
+        for each child of node do
+            value := min(value, minimax(child, depth − 1, TRUE))
+    return value
+*/
+
+
+    // /!\Problème de protée les variables n'éxistent plus dans index.php/!\
+
+    // Init minesweeper
+    morpion_canvas = document.querySelector("canvas.affichage_morp");
+    let morpion_canvas_min = (window.innerWidth < window.innerHeight)? 
+                        window.innerWidth: window.innerHeight;
+    morpion_canvas.width = 0.7 * morpion_canvas_min;
+    morpion_canvas.height = morpion_canvas.width ;
+    morpion = new GrilleMorpion(morpion_canvas);
+    morpion.draw_grille();
+
+    morpion_canvas.addEventListener("mousedown", (event) =>{
+        let mouseX = event.offsetX - (event.offsetX % morpion.SQUARESIZE);
+        let mouseY = event.offsetY - (event.offsetY % morpion.SQUARESIZE);
+    
+        let mouseX_ratio = mouseX / morpion.SQUARESIZE;
+        let mouseY_ratio = mouseY / morpion.SQUARESIZE;
+
+        if(morpion.grille[mouseX_ratio][mouseY_ratio] == -1)
+        {
+            morpion.grille[mouseX_ratio][mouseY_ratio] = 0;
+            morpion.draw_cross(mouseX_ratio, mouseY_ratio);
+
+            //gérer IA
+        }
+    });
 });
 
 

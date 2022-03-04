@@ -100,7 +100,6 @@ class DoublePendulum
     init_double_pendulum()
     {
         this.ctx.fillStyle = PINK;
-        console.log(this.ctx.fillStyle);
         this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
 
         this.calculDeplacements();
