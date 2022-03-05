@@ -57,6 +57,21 @@
 
         <section class="elem">
           <h2>Jeu 2</h2>
+          <canvas class="affichage_dessin" 
+                  alt="un canva sur lequel on peut déssiner">
+          Votre navigateur ne supporte pas cet affichage.     
+          </canvas>
+          <span class="controles">
+            <label for="colorWell">Couleur : </label> 
+            <input type="color" value="#FFFFFF" id="paintColor">
+            <button>Vider canvas</button>
+          </span>
+          
+          <aside>En savoir plus</aside>
+        </section>
+
+        <section class="elem">
+          <h2>Jeu 3</h2>
           <canvas class="affichage_morp" 
                   alt="jeu du morpion, le joueur qui aligne 3 de ses figures gagne">
           Votre navigateur ne supporte pas cet affichage.     

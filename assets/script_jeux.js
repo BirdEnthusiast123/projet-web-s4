@@ -485,7 +485,144 @@ class Minesweeper
     }
 }
 
-const OFS = 5;
+// Code paint
+
+const black = "#000000";
+const white = "#FFFFFF";
+const P_SQSIZE = 10;
+
+class Paint
+{
+    constructor(canvas)
+    {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext("2d");
+        this.ctx.fillStyle = black;
+
+        this.P_WIN_RATIO = canvas.height / P_SQSIZE;
+
+        this.pixels = [];
+        this.init_pixels();
+
+        this.color = white;
+
+        this.init_listeners();
+
+        this.isDrawing = false;
+    }
+
+    init_pixels()
+    {
+        for(let i = 0; i < this.P_WIN_RATIO; i++){
+            this.pixels.push([]);
+        }
+        this.clear_all();
+        this.paint_all();
+    }
+
+    paint(x, y, color)
+    {
+        this.ctx.fillStyle = color;
+    
+        this.ctx.fillRect(  (x * P_SQSIZE),
+                            (y * P_SQSIZE),
+                            P_SQSIZE,
+                            P_SQSIZE
+                         );
+    }
+
+    clear_all()
+    {
+        for(let i = 0; i < this.P_WIN_RATIO; i++){
+            for(let ii = 0; ii < this.P_WIN_RATIO; ii++){
+                this.paint(i, ii, black);
+                this.pixels[i].push([0, black]);
+            }
+        }
+    }
+
+    paint_all(){
+        for(let i = 0; i < this.P_WIN_RATIO; i++){
+            for(let ii = 0; ii < this.P_WIN_RATIO; ii++){
+                if( !(this.pixels[ii] == undefined) && !(this.pixels[ii][i] == undefined)){
+                    this.paint(i, ii, this.pixels[ii][i][1]);
+                } 
+            }
+        }
+    }
+
+    init_listeners()
+    {
+        this.canvas.addEventListener("contextmenu", (event) => 
+        {
+            event.preventDefault();
+
+            let mouseX = event.offsetX - (event.offsetX % P_SQSIZE);
+            let mouseY = event.offsetY - (event.offsetY % P_SQSIZE);
+        
+            let x = mouseX / P_SQSIZE;
+            let y = mouseY / P_SQSIZE;
+            
+            document.getElementById("paintColor").value = this.pixels[y][x][1];
+        });
+
+        this.canvas.addEventListener("mousedown", (event) => {
+            if(event.button != 0) return;
+            let mouseX = event.offsetX - (event.offsetX % P_SQSIZE);
+            let mouseY = event.offsetY - (event.offsetY % P_SQSIZE);
+        
+            let x = mouseX / P_SQSIZE;
+            let y = mouseY / P_SQSIZE;
+
+            let color = document.getElementById("paintColor").value;
+            this.paint(x, y, color);
+            this.pixels[y][x][0] = 1;
+            this.pixels[y][x][1] = color;
+            this.isDrawing = true;
+        });
+        
+        this.canvas.addEventListener("mousemove", (event) => {
+            if (this.isDrawing === true) {
+                let mouseX = event.offsetX - (event.offsetX % P_SQSIZE);
+                let mouseY = event.offsetY - (event.offsetY % P_SQSIZE);
+            
+                let x = mouseX / P_SQSIZE;
+                let y = mouseY / P_SQSIZE;
+
+                let color = document.getElementById("paintColor").value;
+                this.paint(x, y, color);
+                this.pixels[y][x][0] = 1;
+                this.pixels[y][x][1] = color;
+                this.isDrawing = true;
+            }
+        });
+        
+        this.canvas.addEventListener('mouseup', (event) => {
+            if (this.isDrawing === true) {
+                let mouseX = event.offsetX - (event.offsetX % P_SQSIZE);
+                let mouseY = event.offsetY - (event.offsetY % P_SQSIZE);
+            
+                let x = mouseX / P_SQSIZE;
+                let y = mouseY / P_SQSIZE;
+                let color = document.getElementById("paintColor").value;
+                this.paint(x, y, color);
+                this.pixels[y][x][0] = 1;
+                this.pixels[y][x][1] = color;
+                this.isDrawing = false;
+            }
+        });
+
+        document.querySelector("canvas.affichage_dessin ~ .controles button")
+                   .addEventListener("click", () => {
+                        this.clear_all();
+                   });
+    }
+}
+
+
+
+// Code morpion
+const M_OFS = 5;
 
 class GrilleMorpion
 {
@@ -508,13 +645,13 @@ class GrilleMorpion
         this.ctx.lineWidth = 5;
 
         this.ctx.beginPath();
-        this.ctx.moveTo(x * this.SQUARESIZE + OFS, y * this.SQUARESIZE + OFS);
-        this.ctx.lineTo((x + 1) * this.SQUARESIZE - OFS, (y + 1) * this.SQUARESIZE - OFS);
+        this.ctx.moveTo(x * this.SQUARESIZE + M_OFS, y * this.SQUARESIZE + M_OFS);
+        this.ctx.lineTo((x + 1) * this.SQUARESIZE - M_OFS, (y + 1) * this.SQUARESIZE - M_OFS);
         this.ctx.stroke();
 
         this.ctx.beginPath();
-        this.ctx.moveTo( (x + 1) * this.SQUARESIZE - OFS, y * this.SQUARESIZE + OFS);
-        this.ctx.lineTo(x * this.SQUARESIZE + OFS, (y + 1) * this.SQUARESIZE - OFS);
+        this.ctx.moveTo( (x + 1) * this.SQUARESIZE - M_OFS, y * this.SQUARESIZE + M_OFS);
+        this.ctx.lineTo(x * this.SQUARESIZE + M_OFS, (y + 1) * this.SQUARESIZE - M_OFS);
         this.ctx.stroke();
     }
 
@@ -526,7 +663,7 @@ class GrilleMorpion
         this.ctx.beginPath();
         this.ctx.arc(x * this.SQUARESIZE + (this.SQUARESIZE / 2), 
                      y * this.SQUARESIZE + (this.SQUARESIZE / 2), 
-                     this.SQUARESIZE/2 - OFS, 
+                     this.SQUARESIZE/2 - M_OFS, 
                      0, 
                      2 * Math.PI);
         this.ctx.stroke();
@@ -607,21 +744,25 @@ class GrilleMorpion
 // Minesweeper var
 let mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access, mine_sw_ctx;
 
+// Paint var
+let paint_canvas, paint;
+
 // Morpion var
 let morpion, morpion_canvas;
 
 document.addEventListener("DOMContentLoaded", function() {
+    let win_min = (window.innerWidth < window.innerHeight)? 
+                        window.innerWidth: window.innerHeight;
+
     // Init duck petting
     document.querySelectorAll("img")[0].addEventListener("click", pet_duck);
 
     // Init minesweeper
     mine_sw_canvas = document.querySelector(".jeux canvas");
-    mine_sw_min_size = (window.innerWidth < window.innerHeight)? 
-                        window.innerWidth: window.innerHeight;
-    mine_sw_canvas.width = 0.7 * mine_sw_min_size;
+    mine_sw_canvas.width = 0.7 * win_min;
     mine_sw_canvas.height = mine_sw_canvas.width ;
     
-    let font_size = Math.floor(mine_sw_min_size / 20);
+    let font_size = Math.floor(win_min / 20);
 
     mine_sw_ctx = mine_sw_canvas.getContext("2d");
     mine_sw_ctx.font = "" + font_size + "px Arial";
@@ -709,6 +850,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
     );
 
+    paint_canvas = document.querySelector("canvas.affichage_dessin");
+    paint_canvas.width = 0.7 * win_min;
+    paint_canvas.height = paint_canvas.width ;
+    paint = new Paint(paint_canvas);
+
 /*
 Classe ia 
 
@@ -729,11 +875,9 @@ function minimax(node, depth, maximizingPlayer) is
 
     // /!\Problème de protée les variables n'éxistent plus dans index.php/!\
 
-    // Init minesweeper
+    // Init morpion
     morpion_canvas = document.querySelector("canvas.affichage_morp");
-    let morpion_canvas_min = (window.innerWidth < window.innerHeight)? 
-                        window.innerWidth: window.innerHeight;
-    morpion_canvas.width = 0.7 * morpion_canvas_min;
+    morpion_canvas.width = 0.7 * win_min;
     morpion_canvas.height = morpion_canvas.width ;
     morpion = new GrilleMorpion(morpion_canvas);
     morpion.draw_grille();
