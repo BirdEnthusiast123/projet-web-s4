@@ -76,6 +76,9 @@
                   alt="jeu du morpion, le joueur qui aligne 3 de ses figures gagne">
           Votre navigateur ne supporte pas cet affichage.     
           </canvas>
+          <span class="controles">
+            <button>Réinitialiser</button>
+          </span>
           <aside>En savoir plus</aside>
         </section>
       </div>
@@ -131,19 +134,6 @@
               <button>Démarrer</button>
               <button>Arrêter</button>
           </span>
-        </section>
-
-        <!-- A* algortihm -->
-        <section class="elem">
-          <h2>Animation 2</h2>
-          <canvas alt="">
-          </canvas>
-      
-          <span class="controles">
-            <button>Démarrer / Arrêter</button>
-            <button>Nouveau pendule</button>
-          </span>
-          <aside>En savoir plus</aside>
         </section>
       </div>
       <button class="arrow">&gt;</button>

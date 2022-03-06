@@ -1,6 +1,6 @@
 import 
 {
-    pet_duck
+    pet_duck, sleep
 } from "./funcs.js"
 
 // Code minesweeper
@@ -80,7 +80,7 @@ class Minesweeper
     }
 
     // Crée une grille
-    create_board()
+    create_grille()
     {
         for(let i = 0; i < this.NB_LIGNES; i++)
         {
@@ -331,7 +331,7 @@ class Minesweeper
             while(this.bombs_and_digits[mouseX_ratio][mouseY_ratio] == "9")
             {
                 this.bombs_and_digits = [];
-                this.create_board();
+                this.create_grille();
             }
             this.IS_FIRST_DISCOVER = false;
         }
@@ -466,7 +466,7 @@ class Minesweeper
     }
 
     // Initialise les interractions possibles avec la grille
-    init_board()
+    init_grille()
     {
         this.context.fillStyle = "#c18bdb";
         for(let i = 0; i < this.NB_LIGNES; i++)
@@ -481,7 +481,7 @@ class Minesweeper
             }
         }
 
-        this.create_board();
+        this.create_grille();
     }
 }
 
@@ -562,7 +562,7 @@ class Paint
         
             let x = mouseX / P_SQSIZE;
             let y = mouseY / P_SQSIZE;
-            
+
             document.getElementById("paintColor").value = this.pixels[y][x][1];
         });
 
@@ -630,20 +630,23 @@ class GrilleMorpion
     {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d");
-        this.grille = this.init_grille();
+        this.ctx.strokeStyle = 'black';
+        this.ctx.lineWidth = 5;
+        this.grille = [];
+        this.init_grille();
         this.SQUARESIZE = this.canvas.width / 3;
+        this.MORE_MOVES_LEFT = 5;
+        this.J = 1;
+        this.IA = -1;
     }
 
     init_grille()
     {
-        return [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]; 
+        this.grille = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]; 
     }
 
     draw_cross(x, y)
     {
-        this.ctx.strokeStyle = 'black';
-        this.ctx.lineWidth = 5;
-
         this.ctx.beginPath();
         this.ctx.moveTo(x * this.SQUARESIZE + M_OFS, y * this.SQUARESIZE + M_OFS);
         this.ctx.lineTo((x + 1) * this.SQUARESIZE - M_OFS, (y + 1) * this.SQUARESIZE - M_OFS);
@@ -657,9 +660,6 @@ class GrilleMorpion
 
     draw_circle(x, y)
     {
-        this.ctx.strokeStyle = 'black';
-        this.ctx.lineWidth = 5;
-
         this.ctx.beginPath();
         this.ctx.arc(x * this.SQUARESIZE + (this.SQUARESIZE / 2), 
                      y * this.SQUARESIZE + (this.SQUARESIZE / 2), 
@@ -694,7 +694,7 @@ class GrilleMorpion
             for(let j = 0; j < 3; j++)
             {
                 switch (this.grille[i][j]) {
-                    case 0:
+                    case -1:
                         this.draw_cross(i, j);
                         break;
                     case 1:
@@ -707,42 +707,163 @@ class GrilleMorpion
         }
     }
 
-    test_if_finished()
+    clear_grille()
     {
-        // row
-        for(let i = 0; i < 3; i++)
-        {
-            if( (this.grille[i][0] == this.grille[i][1]) && (this.grille[i][0] == this.grille[i][2]))
-            {
-                return this.grille[i][0];
-            }
-        }
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    test_if_finished(grille)
+    {
         // column
         for(let i = 0; i < 3; i++)
         {
-            if( (this.grille[0][i] == this.grille[1][i]) && (this.grille[0][i] == this.grille[2][i]))
+            if
+            ( 
+                (grille[i][0] == grille[i][1]) && 
+                (grille[i][0] == grille[i][2]) && 
+                (grille[i][0] != 0)
+            )
             {
-                return this.grille[0][i];
+                return grille[i][0];
+            }
+        }
+        // row
+        for(let i = 0; i < 3; i++)
+        {
+            if
+            ( 
+                (grille[0][i] == grille[1][i]) && 
+                (grille[0][i] == grille[2][i]) && 
+                (grille[0][i] != 0) 
+            )
+            {
+                return grille[0][i];
             }
         }
         // diag
-        if( (this.grille[0][0] == this.grille[1][1]) && (this.grille[1][1] == this.grille[2][2]))
+        if
+        ( 
+            (grille[0][0] == grille[1][1]) && 
+            (grille[1][1] == grille[2][2]) && 
+            (grille[0][0] != 0)
+        )
         {
-            return this.grille[0][0];
+            return grille[0][0];
         }
 
-        if( (this.grille[2][0] == this.grille[1][1]) && (this.grille[2][0] == this.grille[0][2]))
+        if
+        ( 
+            (grille[2][0] == grille[1][1]) && 
+            (grille[2][0] == grille[0][2]) && 
+            (grille[2][0] != 0)
+        )
         {
-            return this.grille[2][0];
+            return grille[2][0];
         }
 
-        return -1;
+        for(let i = 0; i < 3; i++)
+        {
+            for (let j = 0; j < 3; j++) 
+            {
+                // Il reste des coups a jouer
+                if(grille[i][j] == 0) return this.MORE_MOVES_LEFT;
+            }
+        }
+
+        // Egalite
+        return 0;
+    }
+
+    all_possible_moves(grille, player)
+    { 
+        let res = [];
+        for(let i = 0; i < 3; i++)
+        {
+            for (let j = 0; j < 3; j++)
+            {
+                if(grille[i][j] == 0)
+                {
+                    let tmp = [];
+                    tmp[2] = [...grille[2]];
+                    tmp[1] = [...grille[1]];
+                    tmp[0] = [...grille[0]];
+                    tmp[i][j] = player;
+                    res.push(tmp);
+                }   
+            }
+        }
+        return res;
+    }
+
+    evaluate_for_ai(grille)
+    {
+        let res = this.test_if_finished(grille);
+        if(res == this.IA) return +100;
+        if(res == this.J) return -100;
+        
+        return res;
+    }
+
+    minimax(grille, player)
+    {
+        let end = this.evaluate_for_ai(grille);
+        if(end != this.MORE_MOVES_LEFT)
+        {
+            return end;
+        }
+
+        let moves = this.all_possible_moves(grille, player);
+        let len = moves.length;
+
+        if (player == this.IA)
+        {
+            let heuristic = -1000;
+            for(let i = 0; i < len; i++)
+            {
+                heuristic = Math.max(heuristic, this.minimax(moves[i], this.J));
+            }
+            return heuristic;
+        }
+        else
+        {
+            let heuristic = 1000;
+            for(let i = 0; i < len; i++)
+            {
+                heuristic = Math.min(heuristic, this.minimax(moves[i], this.IA));
+            }
+            return heuristic;
+        }
+    }
+
+    ai_move(grille)
+    {
+        let end = this.test_if_finished(grille);
+        if(end == 0)
+        {
+            return grille;
+        }
+
+        let heuristic = -1500;
+        let moves = this.all_possible_moves(grille, this.IA);
+        let len = moves.length;
+
+        let move_index = -1;
+        for(let i = 0; i < len; i++)
+        {
+            let tmp = this.minimax(moves[i], this.J);
+            if(tmp > heuristic)
+            {
+                heuristic = tmp;
+                move_index = i;
+            }
+        }
+        return moves[move_index];
     }
 }
 
 
 // Minesweeper var
-let mine_sw_canvas, mine_sw_min_size, mine_sw, minesw_access, mine_sw_ctx;
+let mine_sw_canvas, mine_sw, minesw_access, mine_sw_ctx;
 
 // Paint var
 let paint_canvas, paint;
@@ -769,7 +890,7 @@ document.addEventListener("DOMContentLoaded", function() {
     mine_sw_ctx.fillStyle = "#c18bdb";
 
     mine_sw = new Minesweeper(mine_sw_canvas, mine_sw_ctx);
-    mine_sw.init_board();
+    mine_sw.init_grille();
 
     minesw_access = document.querySelector(".jeux input");
     if(minesw_access.checked)
@@ -846,7 +967,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 let tmp = mine_sw.accessibility;
                 mine_sw = new Minesweeper(mine_sw_canvas, mine_sw_ctx);
                 mine_sw.accessibility = tmp;
-                mine_sw.init_board();
+                mine_sw.init_grille();
             }
     );
 
@@ -854,26 +975,6 @@ document.addEventListener("DOMContentLoaded", function() {
     paint_canvas.width = 0.7 * win_min;
     paint_canvas.height = paint_canvas.width ;
     paint = new Paint(paint_canvas);
-
-/*
-Classe ia 
-
-function minimax(node, depth, maximizingPlayer) is
-    if depth = 0 or node is a terminal node then
-        return the heuristic value of node
-    if maximizingPlayer then
-        value := −∞
-        for each child of node do
-            value := max(value, minimax(child, depth − 1, FALSE))
-    else (* minimizing player *)
-        value := +∞
-        for each child of node do
-            value := min(value, minimax(child, depth − 1, TRUE))
-    return value
-*/
-
-
-    // /!\Problème de protée les variables n'éxistent plus dans index.php/!\
 
     // Init morpion
     morpion_canvas = document.querySelector("canvas.affichage_morp");
@@ -889,14 +990,23 @@ function minimax(node, depth, maximizingPlayer) is
         let mouseX_ratio = mouseX / morpion.SQUARESIZE;
         let mouseY_ratio = mouseY / morpion.SQUARESIZE;
 
-        if(morpion.grille[mouseX_ratio][mouseY_ratio] == -1)
+        if(morpion.grille[mouseX_ratio][mouseY_ratio] == 0)
         {
-            morpion.grille[mouseX_ratio][mouseY_ratio] = 0;
-            morpion.draw_cross(mouseX_ratio, mouseY_ratio);
+            morpion.grille[mouseX_ratio][mouseY_ratio] = morpion.J;
 
             //gérer IA
+            morpion.grille = JSON.parse(JSON.stringify( morpion.ai_move(morpion.grille) ));
+            morpion.draw_grille();
         }
     });
+
+    document.querySelector("canvas.affichage_morp ~ .controles button")
+            .addEventListener("click", () =>
+            {
+                morpion.init_grille();
+                morpion.clear_grille();
+                morpion.draw_grille();
+            });
 });
 
 
