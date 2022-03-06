@@ -30,7 +30,7 @@
       <div class="scrollable">
         <!-- Minesweeper-->
         <section class="elem">
-          <h2>Jeu 1</h2>
+          <h2>Démineur</h2>
 
           <canvas class="affichage_mine" alt="Jeu du démineur">
             Votre navigateur ne supporte pas cet affichage graphique.
@@ -56,7 +56,7 @@
         </section>
 
         <section class="elem">
-          <h2>Jeu 2</h2>
+          <h2>C:/ > fhpaint.exe</h2>
           <canvas class="affichage_dessin" 
                   alt="un canva sur lequel on peut déssiner">
           Votre navigateur ne supporte pas cet affichage.     
@@ -71,7 +71,7 @@
         </section>
 
         <section class="elem">
-          <h2>Jeu 3</h2>
+          <h2>Tic Tac Toe</h2>
           <canvas class="affichage_morp" 
                   alt="jeu du morpion, le joueur qui aligne 3 de ses figures gagne">
           Votre navigateur ne supporte pas cet affichage.     
@@ -93,7 +93,7 @@
       <div class="scrollable">
         <!-- Double pendule -->
         <section class="elem">
-          <h2>Animation 1</h2>
+          <h2>Double pendule</h2>
           <canvas 
                 alt="Un pendule attaché à un différent pendule, 
                     étant donné qu'ils s'influent entre eux,
@@ -110,7 +110,7 @@
 
         <!-- Quicksort algorithm -->
         <section class="elem">
-          <h2>Animation 2</h2>
+          <h2>Quicksort</h2>
           <canvas alt="Animation représentant 
                       le fonctionnement de l'algorithme quicksort">
                       Votre navigateur ne supporte pas cet affichage.
@@ -124,7 +124,7 @@
         </section>
 
         <section class="elem">
-          <h2>Animation 3</h2>
+          <h2>Simulation orbite</h2>
           <canvas>
             Votre navigateur ne supporte pas cet affichage.
           </canvas> 
