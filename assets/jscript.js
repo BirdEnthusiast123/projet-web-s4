@@ -91,6 +91,11 @@ class CarouselSlider
     }
 }
 
+const parseId = () =>
+{
+    // do stuff
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     // Init duck petting
     document.querySelectorAll("img")[0].addEventListener("click", pet_duck);
@@ -110,6 +115,20 @@ document.addEventListener("DOMContentLoaded", function() {
             "click",
             function() { this.classList.toggle("displayed"); }
         );
+
+    // Footer
+    document.querySelector("footer label:last-of-type input")
+            .addEventListener("click", function(){
+                let pwd_check = document.querySelector("footer div input:nth-of-type(2)");
+                if(this.checked)
+                {
+                    pwd_check.type = "text";
+                }
+                else
+                {
+                    pwd_check.type = "password";
+                }
+            })
 });
 
 

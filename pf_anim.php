@@ -111,6 +111,7 @@
   </div>
 
   <script src="assets/funcs.js"></script>
+  <script src="assets/script_anim.js"></script>
   <script src="assets/jscript.js"></script>
 </body>
 </html>

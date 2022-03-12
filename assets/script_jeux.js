@@ -483,6 +483,23 @@ class Minesweeper
 
         this.create_grille();
     }
+
+    resize()
+    {
+        let win_min = (window.innerWidth < window.innerHeight)? 
+                        window.innerWidth: window.innerHeight;
+
+        this.canvas.width = 0.7 * win_min;
+        this.canvas.height = this.canvas.width ;
+        
+        let font_size = Math.floor(win_min / 20);
+        this.context.font = "" + font_size + "px Arial";
+        this.context.fillStyle = "#c18bdb";
+
+        this.SQUARESIZE = Math.floor(this.canvas.width / this.NB_LIGNES);
+
+        this.init_grille();
+    }
 }
 
 // Code paint
@@ -616,6 +633,19 @@ class Paint
                    .addEventListener("click", () => {
                         this.clear_all();
                    });
+    }
+
+    resize()
+    {
+        let win_min = (window.innerWidth < window.innerHeight)? 
+                        window.innerWidth: window.innerHeight;
+
+        this.canvas.width = 0.7 * win_min;
+        this.canvas.height = paint_canvas.width;
+
+        this.P_WIN_RATIO = this.canvas.height / P_SQSIZE;
+
+        this.paint_all();
     }
 }
 
@@ -859,6 +889,20 @@ class GrilleMorpion
         }
         return moves[move_index];
     }
+
+    resize()
+    {
+        let win_min = (window.innerWidth < window.innerHeight)? 
+                        window.innerWidth: window.innerHeight;
+
+        this.canvas.width = 0.7 * win_min;
+        this.canvas.height = paint_canvas.width;
+
+        this.SQUARESIZE = this.canvas.width / 3;
+
+        //this.clear_grille();
+        this.draw_grille();
+    }
 }
 
 
@@ -973,7 +1017,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     paint_canvas = document.querySelector("canvas.affichage_dessin");
     paint_canvas.width = 0.7 * win_min;
-    paint_canvas.height = paint_canvas.width ;
+    paint_canvas.height = paint_canvas.width;
     paint = new Paint(paint_canvas);
 
     // Init morpion
@@ -984,6 +1028,7 @@ document.addEventListener("DOMContentLoaded", function() {
     morpion.draw_grille();
 
     morpion_canvas.addEventListener("mousedown", (event) =>{
+        event.preventDefault();
         let mouseX = event.offsetX - (event.offsetX % morpion.SQUARESIZE);
         let mouseY = event.offsetY - (event.offsetY % morpion.SQUARESIZE);
     
@@ -1007,6 +1052,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 morpion.clear_grille();
                 morpion.draw_grille();
             });
+    
+    // Responsiveness
+    // Fonctionne mal car la page en elle meme repond mal aux resizing
+    window.addEventListener("resize", () => {
+        mine_sw.resize();
+        paint.resize();
+        morpion.resize();
+    })
 });
 
 

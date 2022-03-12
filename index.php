@@ -185,7 +185,27 @@
 
     <footer>
       <!-- Contact -->
+      <div>
+        <h3>Contact</h3>
+        <p>L'auteur du protfolio est disponible : </br>
+          par mail : definitelyNot@fakeAdress.com </br>
+          par téléphone : 07 96 02 40
+        </p>
+      </div>
       <!-- Formulaire d'authentification -->
+      <div>
+        <h3>Connectez vous !</h3>
+        <label for="mail">Adresse mail :</label>
+        <input id="mail" type="email"/>
+        <label for="pwd">Mot de passe :</label>
+        <input id="pwd" type="password"/>
+        <label for="pwd_vis">
+          <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
+          Afficher le mot de passe
+        </label>
+        <button>Se connecter</button>
+      </div>
+      
     </footer>
   </div>
 
