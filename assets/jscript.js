@@ -91,6 +91,13 @@ class CarouselSlider
     }
 }
 
+const test_identification = (id, pwd) => 
+{
+    let res1 = this.inputValue.match(/^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{2,}$/);
+    let res2 = this.inputValue.match(/^[a-zA-Z0-9]$/);
+    console.log(res1);
+}
+
 const parseId = () =>
 {
     // do stuff
@@ -129,6 +136,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     pwd_check.type = "password";
                 }
             })
+
+
+    let footer_pwd = document.querySelector("footer input:nth-of-type(2)");
+    let footer_id = document.querySelector("footer input:nth-of-type(1)");
+
+    document.querySelector("footer button")
+            .addEventListener("click", function(){
+                let pre_server = test_identification(footer_id, footer_pwd);
+            });
 });
 
 
