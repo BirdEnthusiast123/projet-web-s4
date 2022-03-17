@@ -1,10 +1,19 @@
+<? 
+$url = $_SERVER['REQUEST_URI'];
+if ($_GET['lang'] === 'en') {
+      $url += "?lang=fr";
+}else{
+      $url += "?lang=en";
+}
+
+?>
+
 <nav>
       <i class="mdi mdi-menu">Menu</i>
       <div class="wrapper-nav">
-            <a href="/">Page principale</a>
-            <a href="/pf_jeux.php">Jeux</a>
+            <a href="/"><?= $trad['nav_home'] ?></a>
+            <a href="/pf_jeux.php"><?= $trad['nav_jeu'] ?></a>
             <a href="/pf_anim.php">Animations</a>
-            <a href="/pf_ecrit.php">Travaux écrits</a>
-            <a href="/pf_about.php">À propos</a>
+            <a href="<?= $url?>"><?= $trad['other_lang'] ?></a>
       </div>
 </nav>
