@@ -1,9 +1,10 @@
-<? 
-$url = $_SERVER['REQUEST_URI'];
+<?php
+$url = $_SERVER['SCRIPT_NAME'];
+var_dump($_SERVER);
 if ($_GET['lang'] === 'en') {
-      $url += "?lang=fr";
+      $url = $url . "?lang=fr";
 }else{
-      $url += "?lang=en";
+      $url = $url . "?lang=en";
 }
 
 ?>
