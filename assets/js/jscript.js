@@ -91,16 +91,19 @@ class CarouselSlider
     }
 }
 
-const test_identification = (id, pwd) => 
+const parseId = (id, pwd) =>
 {
-    let res1 = this.inputValue.match(/^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{2,}$/);
-    let res2 = this.inputValue.match(/^[a-zA-Z0-9]$/);
-    console.log(res1);
+    let res1 = id.match(/^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{2,}$/);
+    let res2 = pwd.match(/^.{4,}/);
+
+    return (res1 != null) && (res2 != null);
 }
 
-const parseId = () =>
+const switch_id_to_red = () =>
 {
-    // do stuff
+    // communicate to the user that the format of the id is wrong
+    let boxes = document.querySelectorAll("footer input");
+    boxes.forEach(box => box.style.border-color = "red")
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -138,14 +141,38 @@ document.addEventListener("DOMContentLoaded", function() {
             })
 
 
-    let footer_pwd = document.querySelector("footer input:nth-of-type(2)");
-    let footer_id = document.querySelector("footer input:nth-of-type(1)");
-
     document.querySelector("footer button")
             .addEventListener("click", function(){
-                let pre_server = test_identification(footer_id, footer_pwd);
+                let footer_pwd = document.querySelector("footer input:nth-of-type(2)").value;
+                let footer_id = document.querySelector("footer input:nth-of-type(1)").value;
+                let pre_server = parseId(footer_id, footer_pwd);
+                console.log(pre_server);
+                if(pre_server)
+                {
+                    
+                }
+                else
+                {
+                    // notify user 
+                    switch_id_to_red();
+                }
             });
-});
 
+    const section = document.querySelector('section p');
+    document.querySelector('.jeux .elem:nth-of-type(4) button')
+            .addEventListener('click', () => {
+              console.log("here1");
+              fetch('http://localhost:8000/assets/php/ajax.php')
+                .then((response) => {
+                  response.json().then((res) => {
+                            res.forEach((res) => {
+                                section.innerHTML += res.username;
+                                section.innerHTML += res.password;
+                            })
+                          })
+                })
+                .catch(() => {console.log("ajax fetch failed")})
+            })
+});
 
 

@@ -261,12 +261,12 @@ article
     justify-content: center;
 }
 
-article:nth-of-type(1)
+.jeux
 {
     background-color: var(--blue2);
 }
 
-article:nth-of-type(1) *:not(.arrow)
+.jeux *:not(.arrow)
 {
     background-color: var(--blue2);
 }
@@ -276,39 +276,19 @@ article:nth-of-type(1) *:not(.arrow)
     display: none;
 }
 
-article:nth-of-type(2)
+.anim
 {
     background-color: var(--pink);
 }
 
-article:nth-of-type(2) *:not(.arrow)
+.anim *:not(.arrow)
 {
     background-color: rgba(0, 0, 0, 0);
 }
 
-article:nth-of-type(2) canvas
+.anim canvas
 {
     background-color: var(--pink);
-}
-
-article:nth-of-type(3)
-{
-    background-color: var(--green1);
-}
-
-article:nth-of-type(3) *:not(.arrow)
-{
-    background-color: var(--green1);
-}
-
-article:nth-of-type(4)
-{
-    background-color: var(--green2);
-}
-
-article:nth-of-type(4) *:not(.arrow)
-{
-    background-color: var(--green2);
 }
 
 

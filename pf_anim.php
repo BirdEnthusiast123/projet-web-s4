@@ -1,16 +1,16 @@
 <?php
 if ($_GET['lang'] === 'fr') {
-    include 'assets/fr.php';
+    include 'assets/php/fr.php';
 } elseif ($_GET['lang'] === 'en') {
-    include 'assets/en.php';
+    include 'assets/php/en.php';
 } else {
-    include 'assets/fr.php';
+    include 'assets/php/fr.php';
 }
 ?>
 
 <!DOCTYPE html>
 
-<?php include "assets/head.php"; ?>
+<?php include "assets/php/head.php"; ?>
 
 <body>
   <div class="parralax">
@@ -27,8 +27,9 @@ if ($_GET['lang'] === 'fr') {
 
     <!-- Navigation bar -->
 
-    <?php include "assets/nav.php"; ?>
-    
+    <?php include "assets/php/nav.php"; ?>
+
+
     <!-- Animation -->
     <article class="slide anim">
       <button class="arrow">&lt;</button>
@@ -97,17 +98,16 @@ if ($_GET['lang'] === 'fr') {
         <input id="pwd" type="password"/>
         <label for="pwd_vis">
           <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
-          <?= $trad['connect_button'] ?>
+          <?= $trad['mdp_aff'] ?>
         </label>
-        <button></button>
+        <button><?= $trad['connect_button'] ?></button>
       </div>
       
     </footer>
   </div>
 
-  <script type="module" src="assets/funcs.js"></script>
-  <script type="module" src="assets/script_jeux.js"></script>
-  <script type="module" src="assets/script_anim.js"></script>
-  <script type="module" src="assets/jscript.js"></script>
+  <script type="module" src="assets/js/funcs.js"></script>
+  <script type="module" src="assets/js/script_anim.js"></script>
+  <script type="module" src="assets/js/jscript.js"></script>
 </body>
 </html>

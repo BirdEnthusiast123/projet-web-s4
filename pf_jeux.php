@@ -1,19 +1,25 @@
+<?php
+if ($_GET['lang'] === 'fr') {
+    include 'assets/php/fr.php';
+} elseif ($_GET['lang'] === 'en') {
+    include 'assets/php/en.php';
+} else {
+    include 'assets/php/fr.php';
+}
+?>
+
 <!DOCTYPE html>
 
-<?php include "assets/head.php"; ?>
+<?php include "assets/php/head.php"; ?>
 
 <body>
   <div class="parralax">
-    <img src="assets/img/duck.png" alt="pixel art d'un canard"/>
+    <img src="assets/img/duck.png" alt=<?= $trad['duck'] ?>/>
     <header>
-      <img src="assets/img/starrysky.PNG" alt="pixel art d'un ciel étoilé" class="background">
+      <img src="assets/img/starrysky.PNG" alt=<?= $trad['sky_img'] ?> class="background">
       <div class="header-text">
         <h1>Portfolio</h1>
-        <p>
-          Vous vous trouvez sur le portfolio de Florent Hardy.<br/>
-          Cliquez sur les flèches pour naviguer.<br/>
-          En espérant que vous profiterez de votre séjour !
-        </p>
+        <p> <?= $trad['title'] ?> </p>
       </div>
       
     </header>
@@ -21,55 +27,106 @@
 
     <!-- Navigation bar -->
 
-    <?php include "assets/nav.php"; ?>
+    <?php include "assets/php/nav.php"; ?>
 
 
     <!-- Jeux -->
-    <article class="jeux">
-      <!-- Minesweeper-->
-      <section class="elem">
-        <h2>Jeu 1</h2>
+    <article class="slide jeux">
+      <button class="arrow">&lt;</button>
+      <div class="scrollable">
+        <!-- Minesweeper-->
+        <section class="elem">
+          <h2><?= $trad['game1'] ?></h2>
 
-        <canvas class="affichage_mine" alt="Jeu du démineur">
-          Votre navigateur ne supporte pas cet affichage graphique.
-        </canvas>
-        <img src="assets/img/Explosion.png" width="0px"/>
-        <img src="assets/img/Flag.png" width="0px"/>
-        
-        <span class="controles">
-          <button>Nouvelle grille</button>
-          <label for="minesw_access">
-            <!-- utilisation de id afin de pouvoir cliquer sur le texte egalement-->
-            <input type="checkbox" id="minesw_access" name="minesw_access"/>
-            Accessibilité
-          </label>
-        </span>
-        
-        <span class="controles">
-          <button>Découvrir case</button>
-          <button>Poser drapeau</button>
-        </span>
+          <canvas class="affichage_mine" alt="Jeu du démineur">
+            <?= $trad['err_canvas'] ?>
+          </canvas>
+          <img src="assets/img/Explosion.png" width="0px"/>
+          <img src="assets/img/Flag.png" width="0px"/>
+          
+          <span class="controles">
+            <button><?= $trad['button1'] ?></button>
+            <label for="minesw_access">
+              <!-- utilisation de id afin de pouvoir cliquer sur le texte egalement-->
+              <input type="checkbox" id="minesw_access" name="minesw_access"/>
+              <?= $trad['access'] ?>
+            </label>
+          </span>
+          
+          <span class="controles">
+            <button><?= $trad['mine_b1'] ?></button>
+            <button><?= $trad['mine_b2'] ?></button>
+          </span>
 
-        <aside>En savoir plus</aside>
-      </section>
+          <aside><?= $trad['savoir_plus'] ?></aside>
+        </section>
 
-      <section class="elem">
-        <h2>Jeu 2</h2>
-        <canvas class="affichage_morp" 
-                alt="jeu du morpion, le joueur qui aligne 3 de ses figures gagne">
-        Votre navigateur ne supporte pas cet affichage.     
-        </canvas>
-        <aside>En savoir plus</aside>
-      </section>
+        <section class="elem">
+          <h2><?= $trad['game2'] ?></h2>
+          <canvas class="affichage_dessin" 
+                  alt="un canva sur lequel on peut déssiner">
+          <?= $trad['err_canvas'] ?>     
+          </canvas>
+          <span class="controles">
+            <label for="colorWell"><?= $trad['color'] ?></label> 
+            <input type="color" value="#FFFFFF" id="paintColor">
+            <button><?= $trad['empty_canv'] ?></button>
+          </span>
+          
+          <aside><?= $trad['savoir_plus'] ?></aside>
+        </section>
+
+        <section class="elem">
+          <h2><?= $trad['game3'] ?></h2>
+          <canvas class="affichage_morp" 
+                  alt="jeu du morpion, le joueur qui aligne 3 de ses figures gagne">
+          <?= $trad['err_canvas'] ?>     
+          </canvas>
+          <span class="controles">
+            <button><?= $trad['reset'] ?></button>
+          </span>
+          <aside><?= $trad['savoir_plus'] ?></aside>
+        </section>
+
+        <section class="elem">
+          <h2><?= $trad['game4'] ?></h2>
+          <button>
+          <?= $trad['inwork'] ?>
+          </button>
+          <p>
+            <!-- Sera géré par requête ajax-->
+          </p>
+        </section>
+      </div>
+      <button class="arrow">&gt;</button>
     </article>
+
     <footer>
       <!-- Contact -->
+      <div>
+        <h3>Contact</h3>
+        <p><?= $trad['contact'] ?></p>
+      </div>
       <!-- Formulaire d'authentification -->
+      <div>
+        <h3><?= $trad['connect'] ?></h3>
+        <label for="mail">E-mail :</label>
+        <input id="mail" type="email"/>
+        <label for="pwd"><?= $trad['mdp'] ?></label>
+        <input id="pwd" type="password"/>
+        <label for="pwd_vis">
+          <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
+          <?= $trad['mdp_aff'] ?>
+        </label>
+        <button><?= $trad['connect_button'] ?></button>
+      </div>
+      
     </footer>
   </div>
 
-  <script type="module" src="assets/funcs.js"></script>
-  <script type="module" src="assets/script_jeux.js"></script>
-  <script type="module" src="assets/jscript.js"></script>
+  <script type="module" src="assets/js/funcs.js"></script>
+  <script type="module" src="assets/js/script_jeux.js"></script>
+  <script type="module" src="assets/js/script_anim.js"></script>
+  <script type="module" src="assets/js/jscript.js"></script>
 </body>
 </html>

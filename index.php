@@ -1,16 +1,16 @@
 <?php
 if ($_GET['lang'] === 'fr') {
-    include 'assets/fr.php';
+    include 'assets/php/fr.php';
 } elseif ($_GET['lang'] === 'en') {
-    include 'assets/en.php';
+    include 'assets/php/en.php';
 } else {
-    include 'assets/fr.php';
+    include 'assets/php/fr.php';
 }
 ?>
 
 <!DOCTYPE html>
 
-<?php include "assets/head.php"; ?>
+<?php include "assets/php/head.php"; ?>
 
 <body>
   <div class="parralax">
@@ -27,7 +27,7 @@ if ($_GET['lang'] === 'fr') {
 
     <!-- Navigation bar -->
 
-    <?php include "assets/nav.php"; ?>
+    <?php include "assets/php/nav.php"; ?>
 
 
     <!-- Jeux -->
@@ -83,9 +83,19 @@ if ($_GET['lang'] === 'fr') {
           <?= $trad['err_canvas'] ?>     
           </canvas>
           <span class="controles">
-            <button><?= $trad['game3'] ?></button>
+            <button><?= $trad['reset'] ?></button>
           </span>
           <aside><?= $trad['savoir_plus'] ?></aside>
+        </section>
+
+        <section class="elem">
+          <h2><?= $trad['game4'] ?></h2>
+          <button>
+          <?= $trad['inwork'] ?>
+          </button>
+          <p>
+            <!-- Sera géré par requête ajax-->
+          </p>
         </section>
       </div>
       <button class="arrow">&gt;</button>
@@ -161,17 +171,17 @@ if ($_GET['lang'] === 'fr') {
         <input id="pwd" type="password"/>
         <label for="pwd_vis">
           <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
-          <?= $trad['connect_button'] ?>
+          <?= $trad['mdp_aff'] ?>
         </label>
-        <button></button>
+        <button><?= $trad['connect_button'] ?></button>
       </div>
       
     </footer>
   </div>
 
-  <script type="module" src="assets/funcs.js"></script>
-  <script type="module" src="assets/script_jeux.js"></script>
-  <script type="module" src="assets/script_anim.js"></script>
-  <script type="module" src="assets/jscript.js"></script>
+  <script type="module" src="assets/js/funcs.js"></script>
+  <script type="module" src="assets/js/script_jeux.js"></script>
+  <script type="module" src="assets/js/script_anim.js"></script>
+  <script type="module" src="assets/js/jscript.js"></script>
 </body>
 </html>
