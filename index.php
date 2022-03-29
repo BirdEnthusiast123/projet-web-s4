@@ -187,7 +187,7 @@
       <!-- Contact -->
       <div>
         <h3>Contact</h3>
-        <p>L'auteur du protfolio est disponible : </br>
+        <p>L'auteur du portfolio est disponible </br>
           par mail : definitelyNot@fakeAdress.com </br>
           par téléphone : 07 96 02 40
         </p>
