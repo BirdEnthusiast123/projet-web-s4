@@ -1,7 +1,6 @@
 import 
 {
     PINK,
-    GREEN1,
     pet_duck,
     sleep
 } from "./funcs.js"
@@ -37,9 +36,9 @@ class DoublePendulum
         this.canvasMinSize = (this.canvas.height < this.canvas.width)? 
                             this.canvas.height: this.canvas.width;
 
-        this.p1 = new Pendule(0, 0, this.canvasMinSize/18, GREEN1);
+        this.p1 = new Pendule(0, 0, this.canvasMinSize/18, "#ffffff");
         
-        this.p2 = new Pendule(0, 0, this.canvasMinSize/18, "#48A8A0");
+        this.p2 = new Pendule(0, 0, this.canvasMinSize/18, "#ffffff");
         this.r1 = this.canvasMinSize/6;
         this.r2 = this.r1;
 
@@ -99,10 +98,12 @@ class DoublePendulum
 
     init_double_pendulum()
     {
-        this.ctx.fillStyle = PINK;
+        this.ctx.fillStyle = "#ffffff00";
         this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
 
         this.calculDeplacements();
+
+        this.ctx.strokeStyle = "#ffffff";
         this.ctx.beginPath();
         this.ctx.moveTo(this.p2.x, this.p2.y);
         this.ctx.lineTo(this.p1.x, this.p1.y);
@@ -137,7 +138,8 @@ function d_pendule_animer(d_pendulum)
         d_pendulum.intervalID = setInterval(function(){
             d_pendulum.calculDeplacements();
     
-            d_pendulum.ctx.fillStyle = PINK;
+            d_pendulum.ctx.fillStyle = "#ffffff00";
+            d_pendulum.ctx.clearRect(0, 0, d_pendulum.canvas.width, d_pendulum.canvas.height);
             d_pendulum.ctx.fillRect(0,
                                     0,
                                     d_pendulum.canvas.width, 
@@ -154,6 +156,7 @@ function d_pendule_animer(d_pendulum)
                                    true); 
                 d_pendulum.ctx.stroke();
             }
+            d_pendulum.ctx.strokeStyle = "#ffffff";
             d_pendulum.ctx.beginPath();
             d_pendulum.ctx.moveTo(d_pendulum.p2.x, d_pendulum.p2.y);
             d_pendulum.ctx.lineTo(d_pendulum.p1.x, d_pendulum.p1.y);
@@ -181,8 +184,8 @@ function d_pendule_reset(d_pendule)
     d_pendule.drawnPoints.splice(0, d_pendule.drawnPoints.length);
     clearInterval(d_pendule.intervalID);
     d_pendule.isAnimated = false;
-    d_pendule.p1 = new Pendule(0, 0, d_pendule.canvas.height/10, GREEN1);
-    d_pendule.p2 = new Pendule(0, 0, d_pendule.canvas.height/10, "#48A8A0");
+    d_pendule.p1 = new Pendule(0, 0, d_pendule.canvas.height/10, "#ffffff");
+    d_pendule.p2 = new Pendule(0, 0, d_pendule.canvas.height/10, "#ffffff");
 
     d_pendule.init_double_pendulum();
 }
@@ -266,7 +269,7 @@ class QSortArray{
 
     draw_value(index)
     {
-        this.context.fillStyle = "#010101AA";
+        this.context.fillStyle = "#ffffffAA";
         this.context.fillRect(index * this.value_width, 
                                 this.canvas.height - (this.array[index] * this.canvas.height),
                                 this.value_width, 
@@ -276,7 +279,8 @@ class QSortArray{
 
     draw_all_value()
     {   
-        this.context.fillStyle = PINK;
+        this.context.fillStyle = "#ffffff00";
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         for(let i = 0; i < this.size; i++)
         {

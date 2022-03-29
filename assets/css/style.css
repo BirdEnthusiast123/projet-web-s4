@@ -12,6 +12,7 @@
     margin: 0%;
     text-align: center;
     font-weight: bold;
+    color: white;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -87,8 +88,7 @@ h1
     position: absolute;
     object-fit: cover;
 
-    transform: translateZ(-10px) scale(2.1);
-    height: 120vh;
+    transform: translateZ(-10px) scale(2);
     width: 100%;
 
     z-index: -1;
@@ -261,14 +261,15 @@ article
     justify-content: center;
 }
 
-article:nth-of-type(1)
+.jeux
 {
-    background-color: var(--blue2);
+    /*background-color: var(--blue2);*/
+    background-color: rgba(0, 0, 0, 0)
 }
 
-article:nth-of-type(1) *:not(.arrow)
+.jeux *:not(.arrow)
 {
-    background-color: var(--blue2);
+    background-color: rgba(0, 0, 0, 0)
 }
 
 .jeux canvas.affichage_mine ~ .controles:nth-of-type(2)
@@ -276,49 +277,33 @@ article:nth-of-type(1) *:not(.arrow)
     display: none;
 }
 
-article:nth-of-type(2)
+.anim
 {
-    background-color: var(--pink);
+    background-color: rgba(0, 0, 0, 0)
 }
 
-article:nth-of-type(2) *:not(.arrow)
+.anim *:not(.arrow)
 {
     background-color: rgba(0, 0, 0, 0);
 }
 
-article:nth-of-type(2) canvas
+.anim canvas
 {
-    background-color: var(--pink);
-}
-
-article:nth-of-type(3)
-{
-    background-color: var(--green1);
-}
-
-article:nth-of-type(3) *:not(.arrow)
-{
-    background-color: var(--green1);
-}
-
-article:nth-of-type(4)
-{
-    background-color: var(--green2);
-}
-
-article:nth-of-type(4) *:not(.arrow)
-{
-    background-color: var(--green2);
+    background-color: rgba(0, 0, 0, 0);
+    border: white solid 2px;
 }
 
 
 footer
 {
-    background-color: var(--blue2);
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: stretch;
+
+    z-index : 10;
 }
 
 footer div
@@ -353,9 +338,9 @@ footer input:not(#pwd_vis)
 
     footer > div:nth-of-type(1)
     {
-        border-right: solid black 2px;
+        border-right: solid white 2px;
         border-style: solid;
-        border-color: black;
+        border-color: white;
         border-width: 0px 2px 0px 0px;
     }
 }

@@ -91,9 +91,25 @@ class CarouselSlider
     }
 }
 
-const parseId = () =>
+const parseId = (id, pwd) =>
 {
-    // do stuff
+    let res1 = id.match(/^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{2,}$/);
+    let res2 = pwd.match(/^.{4,}/);
+
+    return (res1 != null) && (res2 != null);
+}
+
+const switch_id_to_red = () =>
+{
+    // communicate to the user that the format of the id is wrong
+    let boxes = document.querySelectorAll("footer input");
+    boxes.forEach(box => {
+        box.style.borderColor = "red";
+        box.style.borderWidth = "5px";
+    });
+    
+    document.querySelector("footer div:nth-of-type(2) p")
+            .innerHTML = "Mauvaise syntaxe du mail ou du mot de passe. </br>";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -129,7 +145,38 @@ document.addEventListener("DOMContentLoaded", function() {
                     pwd_check.type = "password";
                 }
             })
-});
 
+
+    document.querySelector("footer button")
+            .addEventListener("click", function(){
+                let footer_pwd = document.querySelector("footer input:nth-of-type(2)").value;
+                let footer_id = document.querySelector("footer input:nth-of-type(1)").value;
+                if(parseId(footer_id, footer_pwd))
+                {
+                    
+                }
+                else
+                {
+                    // notify user 
+                    switch_id_to_red();
+                }
+            });
+
+    const section = document.querySelector('section p');
+    document.querySelector('.jeux .elem:nth-of-type(4) button')
+            .addEventListener('click', () => {
+              console.log("here1");
+              fetch('http://localhost:8000/assets/php/ajax.php')
+                .then((response) => {
+                  response.json().then((res) => {
+                            res.forEach((res) => {
+                                section.innerHTML += res.username;
+                                section.innerHTML += res.password;
+                            })
+                          })
+                })
+                .catch(() => {console.log("ajax fetch failed")})
+            })
+});
 
 
