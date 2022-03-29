@@ -1,10 +1,17 @@
 <?php
-if ($_GET['lang'] === 'fr') {
+if(isset($_GET['lang'])) {
+  if ($_GET['lang'] === 'fr') {
     include 'assets/php/fr.php';
-} elseif ($_GET['lang'] === 'en') {
+    $langvar = "fr";
+  } elseif ($_GET['lang'] === 'en') {
     include 'assets/php/en.php';
-} else {
+    $langvar = "en";
+  
+  }
+} 
+else {
     include 'assets/php/fr.php';
+    $langvar = "fr";
 }
 ?>
 

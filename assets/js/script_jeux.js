@@ -1,6 +1,6 @@
 import 
 {
-    pet_duck, sleep
+    pet_duck
 } from "./funcs.js"
 
 // Code minesweeper
@@ -468,7 +468,7 @@ class Minesweeper
     // Initialise les interractions possibles avec la grille
     init_grille()
     {
-        this.context.fillStyle = "#c18bdb";
+        this.context.fillStyle = "#ffffff";
         for(let i = 0; i < this.NB_LIGNES; i++)
         {
             for(let ii = 0; ii < this.NB_LIGNES; ii++)
@@ -494,7 +494,7 @@ class Minesweeper
         
         let font_size = Math.floor(win_min / 20);
         this.context.font = "" + font_size + "px Arial";
-        this.context.fillStyle = "#c18bdb";
+        this.context.fillStyle = "#ffffff";
 
         this.SQUARESIZE = Math.floor(this.canvas.width / this.NB_LIGNES);
 
@@ -660,7 +660,7 @@ class GrilleMorpion
     {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d");
-        this.ctx.strokeStyle = 'black';
+        this.ctx.strokeStyle = 'white';
         this.ctx.lineWidth = 5;
         this.grille = [];
         this.init_grille();

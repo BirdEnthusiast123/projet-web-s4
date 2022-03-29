@@ -89,7 +89,6 @@ h1
     object-fit: cover;
 
     transform: translateZ(-10px) scale(2);
-    width: 100%;
 
     z-index: -1;
 }
@@ -206,7 +205,7 @@ Main elements
 
 .arrow:hover
 {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
 }
@@ -322,6 +321,11 @@ footer div p
 {
     text-align: left;
     padding: 3%;
+}
+
+footer button
+{
+    color: black;
 }
 
 footer input:not(#pwd_vis)
