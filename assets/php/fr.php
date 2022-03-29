@@ -26,7 +26,7 @@ $trad = [
     "stop" => "Arrêter",
     "color" => "Couleur : ",
     "empty_canv" => "Vider canvas",
-    "contact" => "L'auteur du portfolio est disponible : </br>par mail : definitelyNot@fakeAdress.com </br>par téléphone : 07 96 02 40",
+    "contact" => "L'auteur du portfolio est disponible : </br>par mail : <type='email'>definitelyNot@fakeAdress.com </br>par téléphone : 07 96 02 40",
     "connect" => "Connectez vous !",
     "mdp" => "Mot de passe :",
     "mdp_aff" => "Afficher le mot de passe",

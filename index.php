@@ -1,14 +1,18 @@
 <?php
 if ($_GET['lang'] === 'fr') {
     include 'assets/php/fr.php';
+    $lang = "fr";
 } elseif ($_GET['lang'] === 'en') {
     include 'assets/php/en.php';
+    $lang = "en";
 } else {
     include 'assets/php/fr.php';
+    $lang = "fr";
 }
 ?>
 
 <!DOCTYPE html>
+<html lang=<?= $lang ?>>
 
 <?php include "assets/php/head.php"; ?>
 
@@ -16,7 +20,7 @@ if ($_GET['lang'] === 'fr') {
   <div class="parralax">
     <img src="assets/img/duck.png" alt=<?= $trad['duck'] ?>/>
     <header>
-      <img src="assets/img/starrysky.PNG" alt=<?= $trad['sky_img'] ?> class="background">
+      <img src="assets/img/bground.png" alt=<?= $trad['sky_img'] ?> class="background">
       <div class="header-text">
         <h1>Portfolio</h1>
         <p> <?= $trad['title'] ?> </p>
@@ -156,27 +160,7 @@ if ($_GET['lang'] === 'fr') {
       <button class="arrow">&gt;</button>
     </article>
 
-    <footer>
-      <!-- Contact -->
-      <div>
-        <h3>Contact</h3>
-        <p><?= $trad['contact'] ?></p>
-      </div>
-      <!-- Formulaire d'authentification -->
-      <div>
-        <h3><?= $trad['connect'] ?></h3>
-        <label for="mail">E-mail :</label>
-        <input id="mail" type="email"/>
-        <label for="pwd"><?= $trad['mdp'] ?></label>
-        <input id="pwd" type="password"/>
-        <label for="pwd_vis">
-          <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
-          <?= $trad['mdp_aff'] ?>
-        </label>
-        <button><?= $trad['connect_button'] ?></button>
-      </div>
-      
-    </footer>
+    <?php include "assets/php/footer.php"; ?>
   </div>
 
   <script type="module" src="assets/js/funcs.js"></script>

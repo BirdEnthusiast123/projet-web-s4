@@ -26,7 +26,7 @@ $trad = [
     "stop" => "Stop",
     "color" => "Color : ",
     "empty_canv" => "Empty canvas",
-    "contact" => "The author is available : </br>via mail : definitelyNot@fakeAdress.com </br>via phone : 07 96 02 40",
+    "contact" => "The author is available : </br>via mail : <type='email'>definitelyNot@fakeAdress.com </br>via phone : 07 96 02 40",
     "connect" => "Sign in !",
     "mdp" => "Password :",
     "mdp_aff" => "Show password",

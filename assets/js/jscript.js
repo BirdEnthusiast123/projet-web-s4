@@ -103,7 +103,13 @@ const switch_id_to_red = () =>
 {
     // communicate to the user that the format of the id is wrong
     let boxes = document.querySelectorAll("footer input");
-    boxes.forEach(box => box.style.border-color = "red")
+    boxes.forEach(box => {
+        box.style.borderColor = "red";
+        box.style.borderWidth = "5px";
+    });
+    
+    document.querySelector("footer div:nth-of-type(2) p")
+            .innerHTML = "Mauvaise syntaxe du mail ou du mot de passe. </br>";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -145,9 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .addEventListener("click", function(){
                 let footer_pwd = document.querySelector("footer input:nth-of-type(2)").value;
                 let footer_id = document.querySelector("footer input:nth-of-type(1)").value;
-                let pre_server = parseId(footer_id, footer_pwd);
-                console.log(pre_server);
-                if(pre_server)
+                if(parseId(footer_id, footer_pwd))
                 {
                     
                 }

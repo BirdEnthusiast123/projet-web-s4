@@ -83,27 +83,7 @@ if ($_GET['lang'] === 'fr') {
       <button class="arrow">&gt;</button>
     </article>
 
-    <footer>
-      <!-- Contact -->
-      <div>
-        <h3>Contact</h3>
-        <p><?= $trad['contact'] ?></p>
-      </div>
-      <!-- Formulaire d'authentification -->
-      <div>
-        <h3><?= $trad['connect'] ?></h3>
-        <label for="mail">E-mail :</label>
-        <input id="mail" type="email"/>
-        <label for="pwd"><?= $trad['mdp'] ?></label>
-        <input id="pwd" type="password"/>
-        <label for="pwd_vis">
-          <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
-          <?= $trad['mdp_aff'] ?>
-        </label>
-        <button><?= $trad['connect_button'] ?></button>
-      </div>
-      
-    </footer>
+    <?php include "assets/php/footer.php"; ?>
   </div>
 
   <script type="module" src="assets/js/funcs.js"></script>
