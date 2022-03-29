@@ -160,78 +160,7 @@ if ($_GET['lang'] === 'fr') {
       <button class="arrow">&gt;</button>
     </article>
 
-<<<<<<< HEAD
-    <!-- Rédactions / textes -->
-    <article class="slide">
-      <button class="arrow">&lt;</button>
-      <div class="scrollable">
-        <section class="elem">
-          <h2>Texte 1</h2>
-          <canvas alt=""></canvas>
-          <aside>En savoir plus</aside>
-        </section>
-
-        <section class="elem">
-          <h2>Texte 2</h2>
-          <canvas alt=""></canvas>
-          <aside>En savoir plus</aside>
-        </section>
-      </div>
-      <button class="arrow">&gt;</button>
-    </article>
-
-    <!-- About personnel -->
-    <article class="slide">
-      <button class="arrow">&lt;</button>
-      <div class="scrollable">
-        <section class="elem">
-          <h2>Perso 1</h2>
-          <canvas alt=""></canvas>
-          <aside>En savoir plus</aside>
-        </section>
-
-        <section class="elem">
-          <h2>Perso 2</h2>
-          <canvas alt=""></canvas>
-          <aside>En savoir plus</aside>
-        </section>
-
-        <section class="elem">
-          <h2>Perso 3</h2>
-          <canvas alt=""></canvas>
-          <aside>En savoir plus</aside>
-        </section>
-      </div>
-      <button class="arrow">&gt;</button>
-    </article>
-
-    <footer>
-      <!-- Contact -->
-      <div>
-        <h3>Contact</h3>
-        <p>L'auteur du portfolio est disponible </br>
-          par mail : definitelyNot@fakeAdress.com </br>
-          par téléphone : 07 96 02 40
-        </p>
-      </div>
-      <!-- Formulaire d'authentification -->
-      <div>
-        <h3>Connectez vous !</h3>
-        <label for="mail">Adresse mail :</label>
-        <input id="mail" type="email"/>
-        <label for="pwd">Mot de passe :</label>
-        <input id="pwd" type="password"/>
-        <label for="pwd_vis">
-          <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
-          Afficher le mot de passe
-        </label>
-        <button>Se connecter</button>
-      </div>
-      
-    </footer>
-=======
     <?php include "assets/php/footer.php"; ?>
->>>>>>> 2012304a1e6ea281e4c8f6af7d32e15ccefcb742
   </div>
 
   <script type="module" src="assets/js/funcs.js"></script>
