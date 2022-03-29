@@ -205,7 +205,7 @@ Main elements
 
 .arrow:hover
 {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
 }
@@ -286,7 +286,7 @@ article
     background-color: rgba(0, 0, 0, 0);
 }
 
-.anim canvas
+.anim canvas, .affichage_dessin
 {
     background-color: rgba(0, 0, 0, 0);
     border: white solid 2px;
@@ -323,11 +323,6 @@ footer div p
     padding: 3%;
 }
 
-footer button
-{
-    color: black;
-}
-
 footer input:not(#pwd_vis)
 {
     width: 75%;
@@ -346,6 +341,11 @@ footer input:not(#pwd_vis)
         border-style: solid;
         border-color: white;
         border-width: 0px 2px 0px 0px;
+    }
+
+
+    .background {
+        width: 100%;
     }
 }
 
