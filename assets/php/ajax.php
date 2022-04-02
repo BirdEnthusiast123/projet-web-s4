@@ -15,7 +15,7 @@ $res = [
     ],
     [
         "username" => "Embauchez ",
-        "password" => "moi :)",
+        "password" => "moi :) </br>",
     ],
 ];
 

@@ -6,17 +6,18 @@ if(isset($_GET['lang'])) {
   } elseif ($_GET['lang'] === 'en') {
     include 'assets/php/en.php';
     $langvar = "en";
-  
   }
 } 
 else {
     include 'assets/php/fr.php';
     $langvar = "fr";
 }
+
+include 'assets/php/pdo.php';
 ?>
 
 <!DOCTYPE html>
-<!--<html lang="<?= $langvar ?>"> -->
+<html lang="<?= $langvar ?>">
 
 <?php include "assets/php/head.php"; ?>
 
@@ -66,7 +67,7 @@ else {
             <button><?= $trad['mine_b2'] ?></button>
           </span>
 
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <aside><a href="/pf_jeux.php"><?= $trad['savoir_plus'] ?></a></aside>
         </section>
 
         <section class="elem">
@@ -77,11 +78,11 @@ else {
           </canvas>
           <span class="controles">
             <label for="colorWell"><?= $trad['color'] ?></label> 
-            <input type="color" value="#FFFFFF" id="paintColor">
+            <input type="color" value="#000000" id="paintColor">
             <button><?= $trad['empty_canv'] ?></button>
           </span>
           
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <aside><a href="/pf_jeux.php"><?= $trad['savoir_plus'] ?></a></aside>
         </section>
 
         <section class="elem">
@@ -93,17 +94,7 @@ else {
           <span class="controles">
             <button><?= $trad['reset'] ?></button>
           </span>
-          <aside><?= $trad['savoir_plus'] ?></aside>
-        </section>
-
-        <section class="elem">
-          <h2><?= $trad['game4'] ?></h2>
-          <button>
-          <?= $trad['inwork'] ?>
-          </button>
-          <p>
-            <!-- Sera géré par requête ajax-->
-          </p>
+          <aside><a href="/pf_jeux.php"><?= $trad['savoir_plus'] ?></a></aside>
         </section>
       </div>
       <button class="arrow">&gt;</button>
@@ -129,7 +120,7 @@ else {
             <button><?= $trad['dem/arr'] ?></button>
             <button><?= $trad['nv_pendule'] ?></button>
           </span>
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <aside><a href="/pf_anim.php"><?= $trad['savoir_plus'] ?></a></aside>
         </section>
 
         <!-- Quicksort algorithm -->
@@ -144,7 +135,7 @@ else {
             <button><?= $trad['demarrer'] ?></button>
             <button><?= $trad['reset'] ?></button>
           </span>
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <aside><a href="/pf_anim.php"><?= $trad['savoir_plus'] ?></a></aside>
         </section>
 
         <section class="elem">
@@ -158,7 +149,7 @@ else {
               <button><?= $trad['demarrer'] ?></button>
               <button><?= $trad['stop'] ?></button>
           </span>
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <aside><a href="/pf_anim.php"><?= $trad['savoir_plus'] ?></a></aside>
         </section>
       </div>
       <button class="arrow">&gt;</button>

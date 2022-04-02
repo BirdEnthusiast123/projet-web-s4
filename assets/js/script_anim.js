@@ -186,7 +186,7 @@ function d_pendule_reset(d_pendule)
     d_pendule.isAnimated = false;
     d_pendule.p1 = new Pendule(0, 0, d_pendule.canvas.height/10, "#ffffff");
     d_pendule.p2 = new Pendule(0, 0, d_pendule.canvas.height/10, "#ffffff");
-
+    d_pendule.ctx.clearRect(0, 0, d_pendule.canvas.width, d_pendule.canvas.height);
     d_pendule.init_double_pendulum();
 }
 

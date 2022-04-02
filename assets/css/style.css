@@ -160,7 +160,7 @@ nav.displayed .wrapper-nav
 
 nav .wrapper-nav a:hover
 {
-    background-color: rgba(110, 140, 165, 0.60);
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 
@@ -205,7 +205,7 @@ Main elements
 
 .arrow:hover
 {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
 }
@@ -286,7 +286,7 @@ article
     background-color: rgba(0, 0, 0, 0);
 }
 
-.anim canvas, .affichage_dessin
+.anim canvas, .affichage_dessinc
 {
     background-color: rgba(0, 0, 0, 0);
     border: white solid 2px;
@@ -305,7 +305,7 @@ footer
     z-index : 10;
 }
 
-footer div
+footer div, footer form
 {
     display: flex;
     flex-direction: column;
@@ -317,7 +317,7 @@ footer div
     width: 100%;
 }
 
-footer div p
+footer div p, footer form p
 {
     text-align: left;
     padding: 3%;
@@ -326,6 +326,11 @@ footer div p
 footer input:not(#pwd_vis)
 {
     width: 75%;
+}
+
+footer button, footer input
+{
+    color: black;
 }
 
 @media all and (min-width: 576px)
@@ -349,4 +354,16 @@ footer input:not(#pwd_vis)
     }
 }
 
+.user
+{
+    display: flex;
+    align-items: center;
+}
 
+.user button{
+    height: 100px;
+    width: 50%;
+    color: #b91818;
+    background-color:aliceblue;
+    z-index: 5;
+}

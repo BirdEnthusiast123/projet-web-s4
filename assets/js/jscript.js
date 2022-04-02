@@ -108,7 +108,7 @@ const switch_id_to_red = () =>
         box.style.borderWidth = "5px";
     });
     
-    document.querySelector("footer div:nth-of-type(2) p")
+    document.querySelector("footer form p")
             .innerHTML = "Mauvaise syntaxe du mail ou du mot de passe. </br>";
 }
 
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Footer
     document.querySelector("footer label:last-of-type input")
             .addEventListener("click", function(){
-                let pwd_check = document.querySelector("footer div input:nth-of-type(2)");
+                let pwd_check = document.querySelector("footer form input:nth-of-type(2)");
                 if(this.checked)
                 {
                     pwd_check.type = "text";
@@ -148,35 +148,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     document.querySelector("footer button")
-            .addEventListener("click", function(){
+            .addEventListener("click", function(event){
                 let footer_pwd = document.querySelector("footer input:nth-of-type(2)").value;
                 let footer_id = document.querySelector("footer input:nth-of-type(1)").value;
-                if(parseId(footer_id, footer_pwd))
+                if(!(parseId(footer_id, footer_pwd)) )
                 {
-                    
-                }
-                else
-                {
+                    event.preventDefault();
                     // notify user 
                     switch_id_to_red();
                 }
+                else{
+                    let i = window.location.href.indexOf("#");
+                    let res = (i == -1)? window.location.href: window.location.href.slice(0, i);
+                    window.location.href = (res + ("&user=" + footer_id));
+                }
             });
-
-    const section = document.querySelector('section p');
-    document.querySelector('.jeux .elem:nth-of-type(4) button')
-            .addEventListener('click', () => {
-              console.log("here1");
-              fetch('http://localhost:8000/assets/php/ajax.php')
-                .then((response) => {
-                  response.json().then((res) => {
-                            res.forEach((res) => {
-                                section.innerHTML += res.username;
-                                section.innerHTML += res.password;
-                            })
-                          })
-                })
-                .catch(() => {console.log("ajax fetch failed")})
-            })
 });
 
 

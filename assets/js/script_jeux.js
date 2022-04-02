@@ -514,14 +514,14 @@ class Paint
     {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.ctx.fillStyle = black;
+        this.ctx.fillStyle = white;
 
         this.P_WIN_RATIO = canvas.height / P_SQSIZE;
 
         this.pixels = [];
         this.init_pixels();
 
-        this.color = white;
+        this.color = black;
 
         this.init_listeners();
 
@@ -552,8 +552,8 @@ class Paint
     {
         for(let i = 0; i < this.P_WIN_RATIO; i++){
             for(let ii = 0; ii < this.P_WIN_RATIO; ii++){
-                this.paint(i, ii, black);
-                this.pixels[i].push([0, black]);
+                this.paint(i, ii, white);
+                this.pixels[i].push([0, white]);
             }
         }
     }
@@ -1035,7 +1035,11 @@ document.addEventListener("DOMContentLoaded", function() {
         let mouseX_ratio = mouseX / morpion.SQUARESIZE;
         let mouseY_ratio = mouseY / morpion.SQUARESIZE;
 
-        if(morpion.grille[mouseX_ratio][mouseY_ratio] == 0)
+        if(morpion.test_if_finished(morpion.grille) != morpion.MORE_MOVES_LEFT)
+        {
+            return;
+        }
+        else if(morpion.grille[mouseX_ratio][mouseY_ratio] == 0)
         {
             morpion.grille[mouseX_ratio][mouseY_ratio] = morpion.J;
 

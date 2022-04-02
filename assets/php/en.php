@@ -33,5 +33,12 @@ $trad = [
     "connect_button" => "Sign in",
     "nav_home" => "Home",
     "nav_jeu" => "Games",
-    "other_lang" => "Français"
+    "other_lang" => "Français",
+    "morependulum" => "Pendulums: buy one, get one free !",
+    "moresort" => "pls be gentle on the buttons they just started.",
+    "moreorbit" => "Project written by Kevin Hentz and myself for the UE Web Programming 1",
+    "moresweep" => "Code was written during pride month, explaining the colors of the flag representing the absence of danger.</br> I advise against looking at the code, you've been warned.",
+    "morepaint" => "Tool used to create the duck, star of this website. If you didn't know you can pet the duck !",
+    "moretic" => "AI was written using minmax algorithm. Alpha beta pruning and neural networks will come later.",
+    "nav_id" => "Account"
 ];

@@ -33,5 +33,12 @@ $trad = [
     "connect_button" => "Se connecter",
     "nav_home" => "Page principale",
     "nav_jeu" => "Jeux",
-    "other_lang" => "English"
+    "other_lang" => "English",
+    "morependulum" => "Les pendules : un acheté, un offert !",
+    "moresort" => "svp soyez doux sur les boutons ils viennent d'être embauchés",
+    "moreorbit" => "Projet réalisé pour l'UE Programmation Web 1 avec l'étudiant Kevin Hentz",
+    "moresweep" => "Jeu développé pendant le mois de la fierté LGBT, expliquant les couleurs du drapeau sensé représenter l'absence de danger. </br> Merci de ne pas regarder le code, vous ne pourrez pas dire que je ne vous ai pas prévenu !",
+    "morepaint" => "Outil utilisé pour dessinner le canard vedette du site. Si vous ne saviez pas vous pouvez chouchouter le canard !",
+    "moretic" => "L'algorithme minmax a été utilisé pour développer l'IA. L'étalage alpha beta et les neural network viendront plus tard",
+    "nav_id" => "Mon compte"
 ];

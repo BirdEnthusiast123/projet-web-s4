@@ -6,15 +6,18 @@ if(isset($_GET['lang'])) {
   } elseif ($_GET['lang'] === 'en') {
     include 'assets/php/en.php';
     $langvar = "en";
-  
   }
 } 
 else {
     include 'assets/php/fr.php';
     $langvar = "fr";
 }
+
+include 'assets/php/pdo.php';
 ?>
+
 <!DOCTYPE html>
+<html lang="<?= $langvar ?>">
 
 <?php include "assets/php/head.php"; ?>
 
@@ -22,7 +25,7 @@ else {
   <div class="parralax">
     <img src="assets/img/duck.png" alt=<?= $trad['duck'] ?>/>
     <header>
-      <img src="assets/img/starrysky.PNG" alt=<?= $trad['sky_img'] ?> class="background">
+      <img src="assets/img/bground.png" alt=<?= $trad['sky_img'] ?> class="background">
       <div class="header-text">
         <h1>Portfolio</h1>
         <p> <?= $trad['title'] ?> </p>
@@ -34,18 +37,15 @@ else {
     <!-- Navigation bar -->
 
     <?php include "assets/php/nav.php"; ?>
-
-
+  
     <!-- Animation -->
-    <article class="slide anim">
-      <button class="arrow">&lt;</button>
-      <div class="scrollable">
+    <article class="anim">
         <!-- Double pendule -->
         <section class="elem">
           <h2><?= $trad['anim1'] ?></h2>
           <canvas 
                 alt="Un pendule attaché à un différent pendule, 
-                    étant donné qu'ils s'influent entre eux,
+                    étant donné qu'ils s'influencent entre eux,
                     ils créent un mouvement chaotique">
                     <?= $trad['err_canvas'] ?>
           </canvas>
@@ -54,7 +54,7 @@ else {
             <button><?= $trad['dem/arr'] ?></button>
             <button><?= $trad['nv_pendule'] ?></button>
           </span>
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <p><?= $trad['morependulum'] ?></p>
         </section>
 
         <!-- Quicksort algorithm -->
@@ -69,7 +69,7 @@ else {
             <button><?= $trad['demarrer'] ?></button>
             <button><?= $trad['reset'] ?></button>
           </span>
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <p><?= $trad['moresort'] ?></p>
         </section>
 
         <section class="elem">
@@ -83,13 +83,12 @@ else {
               <button><?= $trad['demarrer'] ?></button>
               <button><?= $trad['stop'] ?></button>
           </span>
-          <aside><?= $trad['savoir_plus'] ?></aside>
+          <p><?= $trad['moreorbit'] ?></p>
         </section>
-      </div>
-      <button class="arrow">&gt;</button>
     </article>
 
     <?php include "assets/php/footer.php"; ?>
+
   </div>
 
   <script type="module" src="assets/js/funcs.js"></script>

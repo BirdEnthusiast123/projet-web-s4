@@ -1,22 +1,22 @@
-<footer>
+<footer id="footer">
       <!-- Contact -->
       <div>
         <h3>Contact</h3>
         <p><?= $trad['contact'] ?></p>
       </div>
       <!-- Formulaire d'authentification -->
-      <div>
+      <form action="assets/php/form.php" method="post">
         <h3><?= $trad['connect'] ?></h3>
-        <label for="mail">E-mail :</label>
-        <input id="mail" type="email"/>
-        <label for="pwd"><?= $trad['mdp'] ?></label>
-        <input id="pwd" type="password"/>
+        <label for="username">E-mail :</label>
+        <input id="username" type="username" name="username"/>
+        <label for="password"><?= $trad['mdp'] ?></label>
+        <input id="password" type="password" name="password"/>
         <label for="pwd_vis">
           <input type="checkbox" id="pwd_vis" name="pwd_vis"/>
           <?= $trad['mdp_aff'] ?>
         </label>
         <p></p>
-        <button><?= $trad['connect_button'] ?></button>
-      </div>
+        <button type="submit"><?= $trad['connect_button'] ?></button>
+      </form>
       
-    </footer>
+</footer>
