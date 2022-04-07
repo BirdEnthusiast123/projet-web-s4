@@ -14,6 +14,12 @@ else {
 }
 
 include 'assets/php/pdo.php';
+
+session_start();
+if(!isset($_SESSION["user_session"])) {
+  $_SESSION["user_session"]='none';
+}
+
 ?>
 
 <!DOCTYPE html>

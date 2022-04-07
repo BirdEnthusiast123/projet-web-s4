@@ -6,23 +6,20 @@ $suffix = "?";
 
 if(isset($_GET['lang'])) {
       if ($_GET['lang'] === 'en') {
-            $lang = $en;
             $suffix = $suffix . "lang=en&";
       }else{
-            $lang = $fr;
             $suffix = $suffix . "lang=fr&";
       }
 }else{
-      $lang = $fr;
       $suffix = $suffix . "lang=fr&";
 }
 
-if(isset($_GET['user'])) {
-      $suffix = $suffix . "user=" . $_GET['user'] . "&";
+if($_SESSION['user_session'] != 'none') {
       $id = "/pf_user.php";
 }else{
       $id = "#footer";
 }
+
 
 $home = "/" . $suffix;
 $jeu = "/pf_jeux.php" . $suffix;
