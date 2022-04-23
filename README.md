@@ -6,3 +6,5 @@ Le but du projet est de créer un portfolio regroupant de précédents travaux a
 
 Maquette : 
 https://www.figma.com/file/c4RWDNIpi3jn1IIWM5umT2/Untitled?node-id=0%3A1
+
+Port utilisé: localhost:8000
